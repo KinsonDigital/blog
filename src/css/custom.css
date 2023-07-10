@@ -6,27 +6,39 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+    --ifm-color-primary: #2e8555;
+    --ifm-color-primary-dark: #379fcc;
+    --ifm-color-primary-darker: #3297c3;
+    --ifm-color-primary-darkest: #297ca1;
+    --ifm-color-primary-light: #65b5d8;
+    --ifm-color-primary-lighter: #70bbdb;
+    --ifm-color-primary-lightest: #93cbe4;
+    --ifm-code-font-size: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+    --ifm-color-primary: #58bfe8;
+    --ifm-color-primary-dark: #3cb4e4;
+    --ifm-color-primary-darker: #2eafe2;
+    --ifm-color-primary-darkest: #1b95c5;
+    --ifm-color-primary-light: #74caec;
+    --ifm-color-primary-lighter: #82cfee;
+    --ifm-color-primary-lightest: #acdff4;
+}
+
+.link {
+	color: #a384ee;
+}
+
+.color-section {
+    color: #58BFE8;
+    font-weight: bold;
+}
+  
+.color-sub-section {
+    color: #abc7d2;
 }
 
 /* Discord Logo for navbar link */
@@ -35,64 +47,64 @@
 }
 
 .header-discord-link:after {
-  /* transition: opacity 0.2s; */
-  content: "";
-  width: 48px;
-  height: 48px;
-  display: flex;
-  background-image: url("../../static/img/discord.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 12px;
+    /* transition: opacity 0.2s; */
+    content: "";
+    width: 48px;
+    height: 48px;
+    display: flex;
+    background-image: url("../../static/img/discord.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 12px;
 }
 
 .header-discord-link:after, .header-discord-link:after {
-  border-style: none !important;
-  margin-left: -5px !important;
+    border-style: none !important;
+    margin-left: -5px !important;
 }
 
 
 /* Twitter Logo for navbar link */
 .header-twitter-link:hover:after {
-  opacity: 0.6;
+    opacity: 0.6;
 }
 
 .header-twitter-link:after {
-  /* transition: opacity 0.2s; */
-  content: "";
-  width: 48px;
-  height: 48px;
-  display: flex;
-  background-image: url("../../static/img/twitter-logo.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 12px;
+    /* transition: opacity 0.2s; */
+    content: "";
+    width: 48px;
+    height: 48px;
+    display: flex;
+    background-image: url("../../static/img/twitter-logo.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 12px;
 }
 
 .header-twitter-link:after, .header-twitter-link:after {
-  border-style: none !important;
-  margin-left: -5px !important;
+    border-style: none !important;
+    margin-left: -5px !important;
 }
 
 
 /* Github Logo (dark mode) for navbar link */
 [data-theme='dark'] .header-github-link:hover:after {
-  opacity: 0.6;
+    opacity: 0.6;
 }
 
 [data-theme='dark'] .header-github-link:after {
-  /* transition: opacity 0.2s; */
-  content: "";
-  width: 40px;
-  height: 40px;
-  display: flex;
-  background-image: url("../../static/img/github-dark-mode.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 12px;
+    /* transition: opacity 0.2s; */
+    content: "";
+    width: 40px;
+    height: 40px;
+    display: flex;
+    background-image: url("../../static/img/github-dark-mode.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 12px;
 }
 
 [data-theme='dark'] .header-github-link:after, .header-github-link:after {
-  border-style: none !important;
-  margin-left: -5px !important;
+    border-style: none !important;
+    margin-left: -5px !important;
 }
