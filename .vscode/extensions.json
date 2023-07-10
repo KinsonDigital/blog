@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"xyc.vscode-mdx-preview",
+		"github.vscode-github-actions",
+		"redhat.vscode-yaml",
+		"simonsiefke.svg-preview",
+		"znck.grammarly",
+		"zainchen.json"
+	]
+}
