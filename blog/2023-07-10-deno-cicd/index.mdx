@@ -1,0 +1,278 @@
+---
+slug: cicd-with-deno
+title: CICD With Deno
+authors: kinson
+tags: [deno, cicd, script, workflow]
+---
+
+import { URL } from '@site/src/components/URL';
+
+<br/>
+<div align="center">
+
+![deno](./banner.svg)
+
+</div>
+
+## <span class="color-section">Intro</span>
+
+A lot of people just want to work on their core project and not have to worry about such things as
+documentation, workflows, status checks, a readme file, etc.  I can empathize with this!!  Though I
+am passionate about making sure these things get done and done as best as possible, I also understand
+that everybody's time is limited and you just want to get things done.
+
+But here is the thing.  An investment in these things will pay off in the long run.  Especially when
+it comes to a good CICD pipeline.  You just swap upfront time investment for long-term time savings.
+Running status checks for your pull requests, performing reliable releases and many more
+things are all benefits of a good CICD pipeline.
+
+I have done quite a bit in this space.  **Azure DevOps**, **GitHub Actions**, **Jenkins**, **PowerShell**
+scripts, **YAML** files, **NUKE** for **dotnet** projects, and more.  After the time spent dealing with CICD,
+I still don't regret the time I invested in my CICD skills.  But one thing that I have done differently recently
+is use **Deno** to help with CICD.
+
+
+## <span class="color-section">What is Deno?</span>
+
+If you know what **NodeJS**  is, then the concept is the same.  **Deno** is a runtime for **JavaScript** and **TypeScript** is
+the predecessor to **NodeJS**.  It is built by the same person who created  
+**NodeJS**, <URL link="https://en.wikipedia.org/wiki/Ryan_Dahl" text="Ryan Dayl"/>.
+
+It is a secure runtime that has a lot of
+the same features as **NodeJS**  but with a few differences.  Past mistakes made with **NodeJS** as well as
+lots of experience have helped drive the design of Deno.  I love it and I think you will too!!
+
+:::tip Deno
+Check out **Deno** at <URL link="deno.land"/>.
+:::
+
+
+## <span class="color-section">Some deno benefits</span>
+
+One thing that makes **Deno** awesome is the ability to execute scripts directly from the web using a URL.  That is right.
+You can execute a script directly from the web without the need to download **NodeJS**  and use npm to install a package
+into the notoriously bloated _**node_modules**_ folder.
+
+Just give it a URL and if the content returned is a valid script, it executes it.
+
+This also takes your imports into account.  Executing one file that imports another file will work as expected without
+the worry of dependencies.  **Deno** will download the dependencies and execute them as needed.
+
+So I thought to myself, why can't I just use this to help with my CICD pipeline?  I can and I have.  I have created
+various scripts for common validation, HTTP clients to help pull information from  <URL link="www.nuget.org" text="NuGet"/>,
+my <URL link="github.com/KinsonDigital" text="GitHub Organization"/> projects, and much more.
+
+Using these scripts has not only made my pipelines reusable and reliable but has also made them quick and easy to develop and maintain.
+
+
+## <span class="color-section">So how do you do this?</span>
+
+There are different ways to go about it and this depends on your needs.  You can host the **Deno** scripts right alongside
+your project or you can host them in a central location.  I have done both with no problems and with great success.
+
+I currently centralize all of my CICD needs such as **Deno** scripts and reusable workflows in a single repository
+named Infrastructure.  This gives me the central location I need so all of my organization projects can utilize the
+same CICD scripts.
+
+This is also nice because I can version my scripts so that way when I make improvements or fix
+issues, I can methodically roll out those changes to the consuming projects when I need to.
+
+:::info Reference
+If you want to check out some of the scripts that I have created as well as the **GitHub** workflows  
+that are used across my entire **GitHub** organization, you can check it out <URL link="github.com/KinsonDigital/Infrastructure" text="here"/>.
+:::
+
+Enough selling, let's show you how this can be done by creating a status check workflow that executes a **Deno** script
+that validates that your pull request head branch is valid.
+
+## <span class="color-section">Project setup</span>
+
+### <span class="color-sub-section">1. Create or choose repo</span>
+Create a new or choose an already existing **GitHub** repository.
+
+### <span class="color-sub-section">2. Create new folder & script file</span>
+In the root of your repository, create a folder called _**cicd**_, and then in the folder,
+create a file called _**validate-feature-branch.ts**_.  You can put these scripts anywhere you want.  
+This is just for the sake of example.
+
+
+## <span class="color-section">Add arg validation</span>
+Add the following code to the file to check that the arguments will be passed into the script from the workflow.
+
+``` ts
+if (Deno.args.length != 1) {
+    console.log("::error:: The script requires exactly one argument that is the name of a GIT branch.");
+    Deno.exit(1);
+}
+```
+
+The **Deno** eco-system has its very own runtime API for various tasks just like **NodeJS**  does.  One of those things
+is being able to get the arguments that you can pass to any **Deno** script.  This is done with `Deno.args`.
+
+In the code, we just added a check to verify if no arguments were passed in or if more than one argument was passed in.  If either of these
+conditions is true, then the script will exit with an error code of 1.  This will cause the **GitHub** workflow to
+fail and the pull request will not be able to be merged.
+
+
+## <span class="color-section">Branch name and regex</span>
+To check the name of the branch, we can use some handy regex to validate that the name of the branch meets our branch
+naming requirements. Add the following lines of code to get the argument value and some regex to use for validation.  
+
+:::info sample branch name
+Here is an example of what a branch might look like for the following regex used: `feature/123-my-branch`.  
+A great resource for learning regex is <URL link="regex101.com" text="Regex101"/>!!
+:::
+
+Add the following constants to the script which will be used for the validation and the name of the branch itself.
+
+``` ts
+const branchNameRegEx = /^feature\/[1-9]+-(?!-)[a-z-]+$/gm;
+const branchName = Deno.args[0].trim();
+```
+
+
+## <span class="color-section">Checking the branch name</span>
+
+Now that we have our branch name and some regex to use for validation, add the following _`if..else`_  block 
+which will fail or pass the workflow based on if the branch name meets the validation requirements dictated by
+the regex.
+
+``` ts
+// If the branch name is valid
+if (branchNameRegEx.test(branchName)) {
+    console.log(`::notice::The branch '${branchName}' is valid!! 🎉.`);
+} else {
+    let errorMsg = `::error::The branch '${branchName}' is invalid.😤`;
+    errorMsg += `\nIt should follow the regex pattern: ${branchNameRegEx}`;
+    console.log(errorMsg);
+    Deno.exit(1);
+}
+```
+
+:::tip Workflow Commands
+The pieces of text `::error::` and `::notice::` are called workflow commands.  These will be used by the **GitHub** system
+to display the text in a particular format in the **GitHub** console.
+Click <URL link="docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions" text="here"/> for more info.
+:::
+
+
+## <span class="color-section">Creating a workflow</span>
+
+:::note GitHub workflows
+If you are unfamiliar with **GitHub** workflows, check out the
+<URL link="docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions" text="GitHub Workflow Docs"/>.
+:::
+
+Now that we have our script, we can create a workflow that will execute the script.  Follow the steps below.
+
+### <span class="color-sub-section">1. Create workflow folders</span>
+
+If they do not exist already, create a folder with the name _**.github**_ in the root of the repository and then in _**.github**_
+folder, create a folder with the name _**workflows**_.
+
+### <span class="color-sub-section">2. Create workflow file</span>
+
+In the _**.github/workflows**_ folder, create a file with the name _**feature-branch-status-check.yml**_.
+
+### <span class="color-sub-section">3. Basic workflow structure</span>
+
+In our workflow, give it some basic structure such as the workflow name, a pull request trigger, and a job with a step.
+The first step will be the checkout action.  This is required because we need to get access to the script file
+which lives in the repository.  So we need to check out our code so that we can access the script file.
+
+```yml
+name: ✅Branch Status Check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: master
+
+jobs:
+  branch_status_check:
+    name: Branch Status Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+```
+
+:::tip WORKFLOW TIP
+I like to use emojis for some of my workflow names.  This makes it easier to visualize and manage in the **GitHub** web interface.  
+I like to use '✅' for status checks and '🚀' for releases.  You can of course can do whatever you like!!
+:::
+
+
+### <span class="color-sub-section">4. Setup deno</span>
+
+The **Deno** team has an action on the marketplace for making it easy to install **Deno** in the **GitHub** runner.  This is required
+before you execute any **Deno** commands.  The good thing about **Deno** is that it is super small, cross-platform, and
+has no dependencies.
+
+Add the following step to the workflow below the checkout step to set up Deno.
+
+```yml
+- name: Setup Deno
+  uses: denoland/setup-deno@v1
+  with:
+    deno-version: v1.x.x
+```
+
+### <span class="color-sub-section">5. Add script execution step</span>
+
+Now that we have **Deno** set up, we can execute our script.  Add the following step to the workflow below the **Deno** setup step.
+
+```yml
+- name: Disable Testing Env
+  run: deno run "${{ github.workspace }}/cicd/feature-branch-status-check.yml.ts" "${{ github.head_ref }}";
+```
+
+:::tip WORKFLOW TIP
+The `${{ github.head_ref }}` is a **GitHub** workflow expression that will get the name of the branch
+that is being merged into the master branch. In this case, it would be the feature branch that you are
+wanting to validate.
+
+Go to the <URL link="docs.github.com/en/actions/learn-github-actions/expressions" text="workflow expressions"/> **GitHub**
+documentation for more info.
+:::
+
+The `deno run` command executes the **TypeScript** file we created earlier. Any `string` values separated by a space
+after the script file path is treated as arguments.
+
+The run command syntax is as follows:  
+`deno run [options] [script file path | script url] [arg1, arg2, ...argN]`
+
+Deno has a very nice security model that requires you to explicitly allow access to certain kinds of operations
+like the network, environment variables, file system, and more.  In this case, we do not need to provide and allow
+permission switches/options because we are not doing anything that requires permission.
+
+If you try to execute a script without explicitly allowing access to certain operations, you will get an error
+with a descriptive message explaining exactly what permission is needed.
+
+:::info DENO PERMISSIONS
+Go to the <URL link="deno.land/manual/getting_started/permissions" text="Deno Permissions"/> documentation for more info.
+:::
+
+Thats it!!  Very simple and the only limit is your imagination!!
+
+## <span class="color-section">Summary</span>
+
+Deno is a great option for creating utility scripts for whatever your needs on.  It can be
+local scripts to do things for you locally on your machine to help automate your development workflow, scripts to
+do simple tasks in a project such as cleanup, or this case, be used for **GitHub** workflows to help automate
+your CI/CD process.  I have personally been using this all over my organization and it has been a wonderful experience!!
+
+## <span class="color-section">Resources</span>
+
+
+
+- <URL link="https://deno.land/" text="Deno"/>
+
+    - <URL link="deno.land/manual/getting_started/permissions" text="Permissions"/>
+    - <URL link="deno.land/std" text="Standard Library"/>
+    - <URL link="deno.land/x" text="Third Party Modules"/>
+
+- <URL link="docs.github.com/en/actions" text="GitHub Actions"/>
+- <URL link="regex101.com/" text="Regex101"/>
+
+If you have any questions, want to chat, or contribute to any of my open-source projects, feel free to reach out
+to me on our discord channel or Twitter located at the top right.
