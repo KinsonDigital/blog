@@ -20,7 +20,15 @@
 		"scope": "mdx",
 		"prefix": "csharp",
 		"body": [
-			"```csharp\n${1: code}\n```\n$2"
+			"``` csharp\n${1: code}\n```\n$2"
+		],
+		"description": "C# Code Block"
+	},
+	"Code Block TypeScript": {
+		"scope": "mdx",
+		"prefix": "typescript",
+		"body": [
+			"``` ts\n${1: code}\n```\n$2"
 		],
 		"description": "C# Code Block"
 	},
@@ -116,14 +124,20 @@
 		],
 		"description": "Reference link to another guide."
 	},
-	"Tutorial Project Reference": {
+	"URL Component": {
 		"scope": "mdx",
-		"prefix": "tutorial-proj-ref",
+		"prefix": "url-comp",
 		"body": [
-			":::note Guide Source Code",
-			"Go to the <TutorialLink projectName=\"${1: project name}\"/> tutorial project to see the source code for a fully working example of this guide.",
-			":::\n"
+			"<URL link=\"${1: link-here}\"/>",
 		],
-		"description": "Reference to the open source guide tutorial project."
+		"description": "A new URL component without text."
+	},
+	"URL Component With Text": {
+		"scope": "mdx",
+		"prefix": "url-comp-text",
+		"body": [
+			"<URL link=\"${1: link-here}\" text=\"${2: text-here}\"/>",
+		],
+		"description": "A new URL component with text."
 	},
 }
