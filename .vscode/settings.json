@@ -1,8 +1,9 @@
 {
     "cSpell.words": [
-        "Kinson",
-        "Velaptor"
-    ],
+		"CICD",
+		"Kinson",
+		"Velaptor"
+	],
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,

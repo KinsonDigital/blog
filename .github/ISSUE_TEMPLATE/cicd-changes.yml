@@ -1,0 +1,47 @@
+name: ♻️ CICD Changes
+description: Create an issue for CICD related changes.
+title: "♻️"
+labels: ['♻️cicd']
+body:
+- type: checkboxes
+  attributes:
+    label: Complete The Item Below
+    options:
+    - label: I have updated the title without removing the ♻️ emoji.
+      required: true
+
+- type: textarea
+  attributes:
+    label: Description
+    description: A description of the configuration change.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Acceptance Criteria
+    placeholder: |
+      Example:
+        - [ ] Item 1 complete
+        - [ ] Item 2 complete
+    description: The items to complete in order to satisfy the Definition of Done.
+  validations:
+    required: true
+    render: markdown
+
+- type: checkboxes
+  attributes:
+    label: ToDo Items
+    description: Complete the following items before requesting a PR review.
+    options:
+    - label: Issue linked to the correct project _(if applicable)_.
+    - label: Draft pull request created and linked to this issue _(only required with code changes)_.
+
+- type: checkboxes
+  id: terms
+  attributes:
+    label: Code of Conduct
+    description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/KinsonDigital/.github/blob/master/docs/CODE_OF_CONDUCT.md).
+    options:
+      - label: I agree to follow this project's Code of Conduct.
+        required: true
