@@ -1,6 +1,6 @@
 ---
 slug: cicd-with-deno
-title: CICD With Deno
+title: CICD with Deno
 authors: kinson
 tags: [deno, cicd, script, workflow]
 ---
@@ -16,76 +16,81 @@ import { URL } from '@site/src/components/URL';
 
 ## <span class="color-section">Intro</span>
 
-A lot of people just want to work on their core project and not have to worry about such things as
-documentation, workflows, status checks, a readme file, etc.  I can empathize with this!!  Though I
-am passionate about making sure these things get done and done as best as possible, I also understand
-that everybody's time is limited and you just want to get things done.
+A lot of us just want to work on our core project and not have to worry about things like
+documentation, workflows, status checks, a readme file, right?  I can empathize with that!! 
+Though I'm passionate about making sure those things get done and done well, I also understand
+that everybody's time is limited and you just want to work on your core project.
 
 <!--truncate-->
 
-But here is the thing.  An investment in these things will pay off in the long run.  Especially when
-it comes to a good CICD pipeline.  You just swap upfront time investment for long-term time savings.
-Running status checks for your pull requests, performing reliable releases and many more
-things are all benefits of a good CICD pipeline.
+Here's the thing.  An investment in those things will pay off in the long run, especially 
+when it comes to a good CICD pipeline.  You're swapping an upfront time investment for long-term
+time savings. Running status checks for your pull requests, performing reliable releases 
+and minimizing human error are just a few benefits of a good CICD pipeline.
 
-I have done quite a bit in this space.  **Azure DevOps**, **GitHub Actions**, **Jenkins**, **PowerShell**
-scripts, **YAML** files, **NUKE** for **dotnet** projects, and more.  After the time spent dealing with CICD,
-I still don't regret the time I invested in my CICD skills.  But one thing that I have done differently recently
-is use **Deno** to help with CICD.
+I have used quite a few technologies in the CICD space: **Azure DevOps**, **GitHub Actions**, 
+**Jenkins**, **PowerShell** scripts, **YAML** files, **NUKE** for **dotnet** projects, and more. 
+However, one thing that I've used to help with CICD recently is **Deno** and I think it's
+a game changer! 
 
 
 ## <span class="color-section">What is Deno?</span>
 
-If you know what **NodeJS**  is, then the concept is the same.  **Deno** is a runtime for **JavaScript** and **TypeScript** is
-the predecessor to **NodeJS**.  It is built by the same person who created  
-**NodeJS**, <URL link="https://en.wikipedia.org/wiki/Ryan_Dahl" text="Ryan Dayl"/>.
-
-It is a secure runtime that has a lot of
-the same features as **NodeJS**  but with a few differences.  Past mistakes made with **NodeJS** as well as
-lots of experience have helped drive the design of Deno.  I love it and I think you will too!!
+If you know what **NodeJS**  is, then the concept is the same.  **Deno** is a secure runtime for 
+**JavaScript** and **TypeScript** and is the predecessor to **NodeJS**.  It's built by the 
+same person who created **NodeJS**, <URL link="https://en.wikipedia.org/wiki/Ryan_Dahl" 
+text="Ryan Dayl"/>. His experience and past **NodeJS** mistakes have helped drive the design 
+of Deno.  I love it and I think you will too!!
 
 :::tip Deno
 Check out **Deno** at <URL link="deno.land"/>.
 :::
 
 
-## <span class="color-section">Some deno benefits</span>
+## <span class="color-section">Some Deno benefits</span>
 
-One thing that makes **Deno** awesome is the ability to execute scripts directly from the web using a URL.  That is right.
-You can execute a script directly from the web without the need to download **NodeJS**  and use npm to install a package
-into the notoriously bloated _**node_modules**_ folder.
+One thing that makes **Deno** awesome is the ability to execute scripts directly from the 
+web using a URL.  That's right! You can execute a script directly from the web without 
+downloading **NodeJS**  and using npm to install a package into the notoriously bloated
+_**node_modules**_ folder. Just give **Deno** a URL and if the content returned is a 
+valid script, it executes.
 
-Just give it a URL and if the content returned is a valid script, it executes it.
+**Deno** also takes your imports into account.  Executing one file that imports another 
+file will work as expected without the worry of dependencies.  **Deno** will download the 
+dependencies and execute them as needed.
 
-This also takes your imports into account.  Executing one file that imports another file will work as expected without
-the worry of dependencies.  **Deno** will download the dependencies and execute them as needed.
+After using other technologies, then researching **Deno** I thought, "Why can't I just 
+use this to help with my CICD pipeline?"  I can and I have!  
 
-So I thought to myself, why can't I just use this to help with my CICD pipeline?  I can and I have.  I have created
-various scripts for common validation, HTTP clients to help pull information from  <URL link="www.nuget.org" text="NuGet"/>,
-my <URL link="github.com/KinsonDigital" text="GitHub Organization"/> projects, and much more.
+Here are some of the things you can use **Deno** scripts for:
+- Perform validation on branches and versions
+- Pull information like issues and pull requests about your GitHub projects 
+- Improve and automate tasks when performing releases
+- Improve pull requests status checks
+- Use the same scripts across multiple repositories for repeatability
 
-Using these scripts has not only made my pipelines reusable and reliable but has also made them quick and easy to develop and maintain.
+Using these scripts hasn't only made my pipelines reusable and reliable but has also 
+made them quick and easy to develop and maintain.
 
 
-## <span class="color-section">So how do you do this?</span>
+## <span class="color-section">So how do you do use Deno anyway?</span>
 
-There are different ways to go about it and this depends on your needs.  You can host the **Deno** scripts right alongside
-your project or you can host them in a central location.  I have done both with no problems and with great success.
+There are different ways to go about it depending on your needs.  You can host the **Deno** 
+scripts alongside your project or in a central location.  I have done both with no problems
+and great success.
 
-I currently centralize all of my CICD needs such as **Deno** scripts and reusable workflows in a single repository
-named Infrastructure.  This gives me the central location I need so all of my organization projects can utilize the
-same CICD scripts.
-
-This is also nice because I can version my scripts so that way when I make improvements or fix
-issues, I can methodically roll out those changes to the consuming projects when I need to.
+I currently centralize all of my organization's CICD needs like **Deno** scripts and reusable workflows in a 
+single repository named _Infrastructure_. Having a centralized repo is also 
+nice because I can version my scripts so I can methodically roll out changes to the consuming
+projects when I need to.
 
 :::info Reference
-If you want to check out some of the scripts that I have created as well as the **GitHub** workflows  
-that are used across my entire **GitHub** organization, you can check it out <URL link="github.com/KinsonDigital/Infrastructure" text="here"/>.
+If you want to check out some of my scripts or **GitHub** workflows that are used across my entire 
+**GitHub** organization, you can check them out <URL link="github.com/KinsonDigital/Infrastructure" text="here"/>.
 :::
 
-Enough selling, let's show you how this can be done by creating a status check workflow that executes a **Deno** script
-that validates that your pull request head branch is valid.
+Now that I've sold you on **Deno** 😜, let's create a status check workflow that executes a **Deno** 
+script and validates that your pull request head branch is valid.
 
 ## <span class="color-section">Project setup</span>
 
@@ -93,13 +98,12 @@ that validates that your pull request head branch is valid.
 Create a new or choose an already existing **GitHub** repository.
 
 ### <span class="color-sub-section">2. Create new folder & script file</span>
-In the root of your repository, create a folder called _**cicd**_, and then in the folder,
-create a file called _**validate-feature-branch.ts**_.  You can put these scripts anywhere you want.  
-This is just for the sake of example.
+In the root of your repository (or location of your choice), create a folder called _**cicd**_, then
+inside that folder, create a file called _**validate-feature-branch.ts**_.
 
 
 ## <span class="color-section">Add arg validation</span>
-Add the following code to the file to check that the arguments will be passed into the script from the workflow.
+Add the following code to check that a single argument is being passed into the script from the workflow.
 
 ``` ts
 if (Deno.args.length != 1) {
@@ -108,16 +112,17 @@ if (Deno.args.length != 1) {
 }
 ```
 
-The **Deno** eco-system has its very own runtime API for various tasks just like **NodeJS**  does.  One of those things
-is being able to get the arguments that you can pass to any **Deno** script.  This is done with `Deno.args`.
+The **Deno** eco-system has its own runtime API for various tasks just like **NodeJS**  does.  
+One of those tasks is being able to get the arguments that you can pass to any **Deno** script
+using `Deno.args`.
 
-In the code, we just added a check to verify if no arguments were passed in or if more than one argument was passed in.  If either of these
-conditions is true, then the script will exit with an error code of 1.  This will cause the **GitHub** workflow to
-fail and the pull request will not be able to be merged.
+In the code, we added a check to verify whether or not a **single** argument was passed in.  
+If zero or more than one arguments have been passed in, the script will exit with an error code of 1.  
+Using the `Deno.exit()` function with any number argument greater than zero will fail the **GitHub** workflow.
 
 
 ## <span class="color-section">Branch name and regex</span>
-To check the name of the branch, we can use some handy regex to validate that the name of the branch meets our branch
+We can use some handy regex to validate whether or not the name of the branch meets our branch
 naming requirements. Add the following lines of code to get the argument value and some regex to use for validation.  
 
 :::info sample branch name
@@ -135,8 +140,8 @@ const branchName = Deno.args[0].trim();
 
 ## <span class="color-section">Checking the branch name</span>
 
-Now that we have our branch name and some regex to use for validation, add the following _`if..else`_  block 
-which will fail or pass the workflow based on if the branch name meets the validation requirements dictated by
+Now that we have our branch name and some regex to use for validation, add the following _`if..else`_  block. 
+The workflow will pass or fail based on whether or not the branch name meets the validation requirements dictated by
 the regex.
 
 ``` ts
@@ -165,12 +170,12 @@ If you are unfamiliar with **GitHub** workflows, check out the
 <URL link="docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions" text="GitHub Workflow Docs"/>.
 :::
 
-Now that we have our script, we can create a workflow that will execute the script.  Follow the steps below.
+Now that we have our script, we can create a workflow that will execute the script.  Follow the steps below:
 
 ### <span class="color-sub-section">1. Create workflow folders</span>
 
-If they do not exist already, create a folder with the name _**.github**_ in the root of the repository and then in _**.github**_
-folder, create a folder with the name _**workflows**_.
+If these folders don't already exist, create one with the name _**.github**_ in the root of the repository 
+and _**workflows**_ inside the _**.github**_ folder.
 
 ### <span class="color-sub-section">2. Create workflow file</span>
 
@@ -178,9 +183,9 @@ In the _**.github/workflows**_ folder, create a file with the name _**feature-br
 
 ### <span class="color-sub-section">3. Basic workflow structure</span>
 
-In our workflow, give it some basic structure such as the workflow name, a pull request trigger, and a job with a step.
-The first step will be the checkout action.  This is required because we need to get access to the script file
-which lives in the repository.  So we need to check out our code so that we can access the script file.
+We'll give our workflow some basic structure like the workflow name, a pull request trigger, and a job with a step.
+The first step will be the checkout action which is required in order to get access the script file
+in the repository.  
 
 ```yml
 name: ✅Branch Status Check
@@ -199,15 +204,15 @@ jobs:
 ```
 
 :::tip WORKFLOW TIP
-I like to use emojis for some of my workflow names.  This makes it easier to visualize and manage in the **GitHub** web interface.  
-I like to use '✅' for status checks and '🚀' for releases.  You can of course can do whatever you like!!
+I like to use emojis with some of my workflow names.  I find it makes it easier to visualize and manage in the **GitHub** web interface.  
+I use '✅' for status checks and '🚀' for releases.  You can of course can do whatever you want!!
 :::
 
 
-### <span class="color-sub-section">4. Setup deno</span>
+### <span class="color-sub-section">4. Setup Deno</span>
 
-The **Deno** team has an action on the marketplace for making it easy to install **Deno** in the **GitHub** runner.  This is required
-before you execute any **Deno** commands.  The good thing about **Deno** is that it is super small, cross-platform, and
+The **Deno** team has an action in the marketplace for making it easy to install **Deno** in the **GitHub** runner which is required
+before you execute any **Deno** commands.  The good thing about **Deno** is that it's super small, cross-platform, and
 has no dependencies.
 
 Add the following step to the workflow below the checkout step to set up Deno.
@@ -230,38 +235,37 @@ Now that we have **Deno** set up, we can execute our script.  Add the following 
 
 :::tip WORKFLOW TIP
 The `${{ github.head_ref }}` is a **GitHub** workflow expression that will get the name of the branch
-that is being merged into the master branch. In this case, it would be the feature branch that you are
-wanting to validate.
+that is being merged into the master branch. In this case, it would be the feature branch that you
+want to validate.
 
 Go to the <URL link="docs.github.com/en/actions/learn-github-actions/expressions" text="workflow expressions"/> **GitHub**
 documentation for more info.
 :::
 
 The `deno run` command executes the **TypeScript** file we created earlier. Any `string` values separated by a space
-after the script file path is treated as arguments.
+after the script file path are treated as arguments.
 
 The run command syntax is as follows:  
 `deno run [options] [script file path | script url] [arg1, arg2, ...argN]`
 
 Deno has a very nice security model that requires you to explicitly allow access to certain kinds of operations
-like the network, environment variables, file system, and more.  In this case, we do not need to provide and allow
-permission switches/options because we are not doing anything that requires permission.
-
-If you try to execute a script without explicitly allowing access to certain operations, you will get an error
+like the network, environment variables, file system, and more.  In this case, we don't need to provide and allow
+permission switches/options because we aren't doing anything that requires permission. If you try to execute a script 
+without explicitly allowing access to certain operations, you will get an error
 with a descriptive message explaining exactly what permission is needed.
 
 :::info DENO PERMISSIONS
 Go to the <URL link="deno.land/manual/getting_started/permissions" text="Deno Permissions"/> documentation for more info.
 :::
 
-Thats it!!  Very simple and the only limit is your imagination!!
+That's it!!  Very simple and the only limit is your imagination!!
 
 ## <span class="color-section">Summary</span>
 
-Deno is a great option for creating utility scripts for whatever your needs on.  It can be
-local scripts to do things for you locally on your machine to help automate your development workflow, scripts to
-do simple tasks in a project such as cleanup, or this case, be used for **GitHub** workflows to help automate
-your CI/CD process.  I have personally been using this all over my organization and it has been a wonderful experience!!
+Deno is a great option for creating utility scripts for whatever your needs are.  It can be
+local scripts on your machine to help automate your development workflow, scripts to
+do simple tasks in a project such as cleanup, or in this case, for **GitHub** workflows to help automate
+your CICD process.  I have personally been using this all over my organization and it's been a wonderful experience!!
 
 ## <span class="color-section">Resources</span>
 
