@@ -1,0 +1,28 @@
+name: 📃 New Blog Post
+description: Create an issue to add create a new blog post.
+title: "📃New Blog Post - "
+labels: ['📃new blog post']
+body:
+- type: textarea
+  attributes:
+    label: Description
+    description: A description of the new blog post.
+  validations:
+    required: true
+
+- type: checkboxes
+  attributes:
+    label: ToDo Items
+    description: Complete the following items before requesting a PR review.
+    options:
+    - label: Issue linked to the correct project _(if applicable)_.
+    - label: Draft pull request created and linked to this issue _(only required with code changes)_.
+
+- type: checkboxes
+  id: terms
+  attributes:
+    label: Code of Conduct
+    description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/KinsonDigital/.github/blob/master/docs/CODE_OF_CONDUCT.md).
+    options:
+      - label: I agree to follow this project's Code of Conduct.
+        required: true

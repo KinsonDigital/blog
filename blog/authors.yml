@@ -1,17 +1,5 @@
-endi:
-  name: Endilie Yacop Sucipto
-  title: Maintainer of Docusaurus
-  url: https://github.com/endiliey
-  image_url: https://github.com/endiliey.png
-
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
-
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
+kinson:
+  name: Calvin Wilkinson
+  title: Creator and Maintainer of Velaptor (and other projects)
+  url: https://github.com/CalvinWilkinson
+  image_url: https://raw.githubusercontent.com/KinsonDigital/blog/main/static/img/kinson-profile.png
