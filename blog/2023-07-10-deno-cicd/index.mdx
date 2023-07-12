@@ -2,7 +2,7 @@
 slug: cicd-with-deno
 title: CICD with Deno
 authors: kinson
-tags: [deno, cicd, script, workflow]
+tags: [deno, cicd, scripting, workflow, github action]
 ---
 
 import { URL } from '@site/src/components/URL';
@@ -17,9 +17,10 @@ import { URL } from '@site/src/components/URL';
 ## <span class="color-section">Intro</span>
 
 A lot of us just want to work on our core project and not have to worry about things like
-documentation, workflows, status checks, a readme file, right?  I can empathize with that!! 
+documentation, workflows, status checks, and a readme file, right?  I can empathize with that!! 
 Though I'm passionate about making sure those things get done and done well, I also understand
 that everybody's time is limited and you just want to work on your core project.
+
 
 <!--truncate-->
 
@@ -37,9 +38,9 @@ a game changer!
 ## <span class="color-section">What is Deno?</span>
 
 If you know what **NodeJS**  is, then the concept is the same.  **Deno** is a secure runtime for 
-**JavaScript** and **TypeScript** and is the predecessor to **NodeJS**.  It's built by the 
-same person who created **NodeJS**, <URL link="https://en.wikipedia.org/wiki/Ryan_Dahl" 
-text="Ryan Dayl"/>. His experience and past **NodeJS** mistakes have helped drive the design 
+**JavaScript** and **TypeScript** built with <URL link="www.rust-lang.org/" text="Rust"/> and is the predecessor to **NodeJS**.  It's built by the 
+same person who created **NodeJS**, <URL link="en.wikipedia.org/wiki/Ryan_Dahl" 
+text="Ryan Dayl"/>. As stated by Ryan Dayl himself, his experience and past **NodeJS** mistakes have helped drive the design 
 of Deno.  I love it and I think you will too!!
 
 :::tip Deno
@@ -66,30 +67,29 @@ Here are some of the things you can use **Deno** scripts for:
 - Perform validation on branches and versions
 - Pull information like issues and pull requests about your GitHub projects 
 - Improve and automate tasks when performing releases
-- Improve pull requests status checks
+- Improve pull request status checks
 - Use the same scripts across multiple repositories for repeatability
 
 Using these scripts hasn't only made my pipelines reusable and reliable but has also 
 made them quick and easy to develop and maintain.
 
 
-## <span class="color-section">So how do you do use Deno anyway?</span>
+## <span class="color-section">So how do you do use Deno for CICD?</span>
 
 There are different ways to go about it depending on your needs.  You can host the **Deno** 
-scripts alongside your project or in a central location.  I have done both with no problems
+scripts alongside your project or in a central location like another repository.  I have done both with no problems
 and great success.
 
-I currently centralize all of my organization's CICD needs like **Deno** scripts and reusable workflows in a 
-single repository named _Infrastructure_. Having a centralized repo is also 
-nice because I can version my scripts so I can methodically roll out changes to the consuming
-projects when I need to.
+I currently centralize all of my <URL link="github.com/KinsonDigital" text="GitHub Organization's"/> CICD needs like
+**Deno** scripts and reusable workflows in a single repository named _Infrastructure_. Having a centralized repo is also 
+nice because I can version my scripts so I can methodically roll out changes to the consuming projects when I need to.
 
 :::info Reference
 If you want to check out some of my scripts or **GitHub** workflows that are used across my entire 
 **GitHub** organization, you can check them out <URL link="github.com/KinsonDigital/Infrastructure" text="here"/>.
 :::
 
-Now that I've sold you on **Deno** 😜, let's create a status check workflow that executes a **Deno** 
+Now that I've sold you on **Deno** 😉, let's create a status check workflow that executes a **Deno** 
 script and validates that your pull request head branch is valid.
 
 ## <span class="color-section">Project setup</span>
@@ -101,6 +101,9 @@ Create a new or choose an already existing **GitHub** repository.
 In the root of your repository (or location of your choice), create a folder called _**cicd**_, then
 inside that folder, create a file called _**validate-feature-branch.ts**_.
 
+:::note Script location
+It does not matter where you put your scripts.  That is up to you and your needs.
+:::
 
 ## <span class="color-section">Add arg validation</span>
 Add the following code to check that a single argument is being passed into the script from the workflow.
@@ -112,12 +115,12 @@ if (Deno.args.length != 1) {
 }
 ```
 
-The **Deno** eco-system has its own runtime API for various tasks just like **NodeJS**  does.  
-One of those tasks is being able to get the arguments that you can pass to any **Deno** script
-using `Deno.args`.
+The **Deno** eco-system has a runtime API for various tasks just like **NodeJS**  does.  
+One of those tasks is being able to get the arguments that you pass into any **Deno** script
+using `Deno.args` array.
 
 In the code, we added a check to verify whether or not a **single** argument was passed in.  
-If zero or more than one arguments have been passed in, the script will exit with an error code of 1.  
+If zero or more than one argument has been passed in, the script will exit with an error code of 1.  
 Using the `Deno.exit()` function with any number argument greater than zero will fail the **GitHub** workflow.
 
 
@@ -125,8 +128,8 @@ Using the `Deno.exit()` function with any number argument greater than zero will
 We can use some handy regex to validate whether or not the name of the branch meets our branch
 naming requirements. Add the following lines of code to get the argument value and some regex to use for validation.  
 
-:::info sample branch name
-Here is an example of what a branch might look like for the following regex used: `feature/123-my-branch`.  
+:::info BRANCH NAME EXAMPLE
+Example branch name for the following regex: `feature/123-my-branch`.  
 A great resource for learning regex is <URL link="regex101.com" text="Regex101"/>!!
 :::
 
@@ -158,7 +161,7 @@ if (branchNameRegEx.test(branchName)) {
 
 :::tip Workflow Commands
 The pieces of text `::error::` and `::notice::` are called workflow commands.  These will be used by the **GitHub** system
-to display the text in a particular format in the **GitHub** console.
+to display the text in a particular visual format in the **GitHub** console.
 Click <URL link="docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions" text="here"/> for more info.
 :::
 
@@ -166,25 +169,24 @@ Click <URL link="docs.github.com/en/actions/using-workflows/workflow-commands-fo
 ## <span class="color-section">Creating a workflow</span>
 
 :::note GitHub workflows
-If you are unfamiliar with **GitHub** workflows, check out the
-<URL link="docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions" text="GitHub Workflow Docs"/>.
+If you are unfamiliar with **GitHub** workflows, check out the <URL link="docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions" text="GitHub Workflow Docs"/>.
 :::
 
 Now that we have our script, we can create a workflow that will execute the script.  Follow the steps below:
 
 ### <span class="color-sub-section">1. Create workflow folders</span>
 
-If these folders don't already exist, create one with the name _**.github**_ in the root of the repository 
-and _**workflows**_ inside the _**.github**_ folder.
+If these folders don't already exist, create a folder with the name _**.github**_ in the root of the repository 
+and then create a folder named _**workflows**_ inside the _**.github**_ folder.
 
 ### <span class="color-sub-section">2. Create workflow file</span>
 
-In the _**.github/workflows**_ folder, create a file with the name _**feature-branch-status-check.yml**_.
+In the _**.github/workflows**_ folder, create a file with the name _**branch-status-check.yml**_.
 
 ### <span class="color-sub-section">3. Basic workflow structure</span>
 
 We'll give our workflow some basic structure like the workflow name, a pull request trigger, and a job with a step.
-The first step will be the checkout action which is required in order to get access the script file
+The first step will be the checkout action which is required to get access to the script file
 in the repository.  
 
 ```yml
@@ -200,7 +202,7 @@ jobs:
     name: Branch Status Check
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 ```
 
 :::tip WORKFLOW TIP
@@ -230,7 +232,7 @@ Now that we have **Deno** set up, we can execute our script.  Add the following 
 
 ```yml
 - name: Disable Testing Env
-  run: deno run "${{ github.workspace }}/cicd/feature-branch-status-check.yml.ts" "${{ github.head_ref }}";
+  run: deno run "${{ github.workspace }}/cicd/branch-status-check.yml.ts" "${{ github.head_ref }}";
 ```
 
 :::tip WORKFLOW TIP
@@ -243,16 +245,17 @@ documentation for more info.
 :::
 
 The `deno run` command executes the **TypeScript** file we created earlier. Any `string` values separated by a space
-after the script file path are treated as arguments.
+after the script file path is treated as arguments.
 
 The run command syntax is as follows:  
 `deno run [options] [script file path | script url] [arg1, arg2, ...argN]`
 
 Deno has a very nice security model that requires you to explicitly allow access to certain kinds of operations
 like the network, environment variables, file system, and more.  In this case, we don't need to provide and allow
-permission switches/options because we aren't doing anything that requires permission. If you try to execute a script 
-without explicitly allowing access to certain operations, you will get an error
-with a descriptive message explaining exactly what permission is needed.
+permission switches/options because we aren't doing anything that requires permission.
+
+If you try to execute a script without explicitly allowing access to certain operations, you will get an error
+with a descriptive message explaining exactly what permission is needed and why.
 
 :::info DENO PERMISSIONS
 Go to the <URL link="deno.land/manual/getting_started/permissions" text="Deno Permissions"/> documentation for more info.
@@ -264,12 +267,10 @@ That's it!!  Very simple and the only limit is your imagination!!
 
 Deno is a great option for creating utility scripts for whatever your needs are.  It can be
 local scripts on your machine to help automate your development workflow, scripts to
-do simple tasks in a project such as cleanup, or in this case, for **GitHub** workflows to help automate
+do simple tasks in a project such as cleanup, or this case, for **GitHub** workflows to help automate
 your CICD process.  I have personally been using this all over my organization and it's been a wonderful experience!!
 
 ## <span class="color-section">Resources</span>
-
-
 
 - <URL link="https://deno.land/" text="Deno"/>
 
@@ -279,6 +280,57 @@ your CICD process.  I have personally been using this all over my organization a
 
 - <URL link="docs.github.com/en/actions" text="GitHub Actions"/>
 - <URL link="regex101.com/" text="Regex101"/>
+- <URL link="www.rust-lang.org/" text="Rust"/>
+
+<details closed><summary>Full TypeScript Source</summary>
+
+```ts
+if (Deno.args.length != 1) {
+    console.log("::error:: The script requires exactly one argument that is the name of a GIT branch.");
+    Deno.exit(1);
+}
+
+const branchNameRegEx = /^feature\/[1-9]+-(?!-)[a-z-]+$/gm;
+const branchName = Deno.args[0].trim();
+
+// If the branch name is valid
+if (branchNameRegEx.test(branchName)) {
+    console.log(`::notice::The branch '${branchName}' is valid!! 🎉.`);
+} else {
+    let errorMsg = `::error::The branch '${branchName}' is invalid.😤`;
+    errorMsg += `\nIt should follow the regex pattern: ${branchNameRegEx}`;
+    console.log(errorMsg);
+    Deno.exit(1);
+}
+```
+</details>
+
+<details closed><summary>Full Workflow Source</summary>
+
+```yml
+name: ✅Branch Status Check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: master
+
+jobs:
+  branch_status_check:
+    name: Branch Status Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x.x
+  
+      - name: Disable Testing Env
+        run: deno run "${{ github.workspace }}/cicd/branch-status-check.yml.ts" "${{ github.head_ref }}";
+```
+</details>
 
 If you have any questions, want to chat, or contribute to any of my open-source projects, feel free to reach out
 to me on our discord channel or Twitter located at the top right.
