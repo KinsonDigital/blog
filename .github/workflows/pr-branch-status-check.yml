@@ -1,4 +1,4 @@
-name: ✅Feature Branch Status Check
+name: ✅PR Branch Status Check
 
 
 defaults:
@@ -14,7 +14,7 @@ on:
 
 jobs:
   pr_branch_status_check:
-    name: Pull Request Branch Status Check
+    name: PR Branch Status Check
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
