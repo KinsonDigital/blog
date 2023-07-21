@@ -22,18 +22,16 @@ jobs:
     - name: Setup Deno
       uses: denoland/setup-deno@v1
       with:
-        deno-version: v1.32.x
+        deno-version: v1.35.x
 
     - name: Validate Branch
       run: |
         $targetBranch = "${{ github.base_ref }}";
         $srcBranch = "${{ github.head_ref }}";
 
-        $featureBranchRegEx = "feature\/[1-9]+-(?!-)[a-z-]+";
-
         # Validate the source branch
-        if ($srcBranch -notmatch $featureBranchRegEx) {
-          echo "::error::The source branch name '$srcBranch' is invalid. It must match the regex '$featureBranchRegEx'";
+        if ($srcBranch -notmatch "feature\/[1-9]+-(?!-)[a-z-]+") {
+          echo "::error::The source branch name '$srcBranch' is invalid. It must match the regex 'feature/#-<branch-description>'";
           exit 1;
         }
 
