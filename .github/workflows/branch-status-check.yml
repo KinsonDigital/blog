@@ -33,7 +33,7 @@ jobs:
         $dependatobt
 
         # Validate the source branch
-        if ($srcBranch -notmatch "feature\/[1-9]+-(?!-)[a-z-]+") {
+        if ($srcBranch -notmatch "${{ vars.BRANCH_STATUS_CHECK_REGEX }}") {
           echo "::error::The source branch name '$srcBranch' is invalid. It must match the regex 'feature/#-<branch-description>'";
           exit 1;
         }
