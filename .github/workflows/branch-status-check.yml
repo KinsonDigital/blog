@@ -33,13 +33,16 @@ jobs:
         $dependatobt
 
         # Validate the source branch
-        if ($srcBranch -notmatch "${{ vars.BRANCH_STATUS_CHECK_REGEX }}") {
-          echo "::error::The source branch name '$srcBranch' is invalid. It must match the regex 'feature/#-<branch-description>'";
+        if ($srcBranch -notmatch "${{ vars.FEATURE_BRANCH_REGEX }}" -and $srcBranch -notmatch "${{ vars.RENOVATE_BRANCH_REGEX }}") {
+          $errorMsg = "::error::The source branch name '$srcBranch' is invalid.";
+          $errorMsg += "`nIt must match the regex '${{ vars.FEATURE_BRANCH_REGEX }}' or `${{ vars.RENOVATE_BRANCH_REGEX }}`";
+
+          Write-Host $errorMsg;
           exit 1;
         }
 
         # Validate the target branch
         if ($targetBranch -ne "main") {
-          echo "::error::The target branch must be 'main'";
+          Write-Host "::error::The target branch must be 'main'";
           exit 1;
         }
