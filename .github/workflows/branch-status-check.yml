@@ -35,7 +35,7 @@ jobs:
         # Validate the source branch
         if ($srcBranch -notmatch "${{ vars.FEATURE_BRANCH_REGEX }}" -and $srcBranch -notmatch "${{ vars.RENOVATE_BRANCH_REGEX }}") {
           $errorMsg = "::error::The source branch name '$srcBranch' is invalid.";
-          $errorMsg += "`nIt must match the regex '${{ vars.FEATURE_BRANCH_REGEX }}' or `${{ vars.RENOVATE_BRANCH_REGEX }}`";
+          $errorMsg += "`nIt must match the regex '${{ vars.FEATURE_BRANCH_REGEX }}' or '${{ vars.RENOVATE_BRANCH_REGEX }}'";
 
           Write-Host $errorMsg;
           exit 1;
