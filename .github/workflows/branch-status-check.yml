@@ -17,12 +17,12 @@ jobs:
     name: PR Branch Status Check
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup Deno
       uses: denoland/setup-deno@v1
       with:
-        deno-version: v1.35.x
+        deno-version: ${{ vars.DENO_VERSION  }}
 
     - name: Validate Branch
       run: |
@@ -33,7 +33,7 @@ jobs:
         $dependatobt
 
         # Validate the source branch
-        if ($srcBranch -notmatch "feature\/[1-9]+-(?!-)[a-z-]+") {
+        if ($srcBranch -notmatch "${{ vars.BRANCH_STATUS_CHECK_REGEX }}") {
           echo "::error::The source branch name '$srcBranch' is invalid. It must match the regex 'feature/#-<branch-description>'";
           exit 1;
         }
