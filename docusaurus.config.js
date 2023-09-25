@@ -1,152 +1,154 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Kinson Digital',
-  tagline: 'Quality Software Development',
-  favicon: 'img/favicon.ico',
+	title: "Kinson Digital",
+	tagline: "Quality Software Development",
+	favicon: "img/favicon.ico",
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-test-site.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/blog',
+	// Set the production url of your site here
+	url: "https://your-docusaurus-test-site.com",
+	// Set the /<baseUrl>/ pathname under which your site is served
+	// For GitHub pages deployment, it is often '/<projectName>/'
+	baseUrl: "/blog",
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'KinsonDigital', // Usually your GitHub org/user name.
-  projectName: 'blog', // Usually your repo name.
+	// GitHub pages deployment config.
+	// If you aren't using GitHub pages, you don't need these.
+	organizationName: "KinsonDigital", // Usually your GitHub org/user name.
+	projectName: "blog", // Usually your repo name.
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+	onBrokenLinks: "throw",
+	onBrokenMarkdownLinks: "warn",
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
+	// Even if you don't use internalization, you can use this field to set useful
+	// metadata like html lang. For example, if your site is Chinese, you may want
+	// to replace "en" with "zh-Hans".
+	i18n: {
+		defaultLocale: "en",
+		locales: ["en"],
+	},
 
-  presets: [
-    [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: false,
-        blog: {
-          routeBasePath: '/',
-          showReadingTime: true,
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
-    ],
-  ],
+	presets: [
+		[
+			"classic",
+			/** @type {import('@docusaurus/preset-classic').Options} */
+			({
+				docs: false,
+				blog: {
+					routeBasePath: "/",
+					showReadingTime: true,
+				},
+				theme: {
+					customCss: require.resolve("./src/css/custom.css"),
+				},
+			}),
+		],
+	],
 
-    // ...
-    plugins: [
-        [
-            '@docusaurus/plugin-content-blog',
-            {
-                /**
-                 * Required for any multi-instance plugin
-                 */
-                id: 'news',
+	// ...
+	plugins: [
+		[
+			"@docusaurus/plugin-content-blog",
+			{
+				/**
+				 * Required for any multi-instance plugin
+				 */
+				id: "news",
 
-                /**
-                 * URL route for the blog section of your site.
-                 * *DO NOT* include a trailing slash.
-                 */
-                routeBasePath: 'news',
+				/**
+				 * URL route for the blog section of your site.
+				 * *DO NOT* include a trailing slash.
+				 */
+				routeBasePath: "news",
 
-                /**
-                 * Path to data on filesystem relative to site dir.
-                 */
-                path: './news',
-            },
-        ],
-    ],
+				/**
+				 * Path to data on filesystem relative to site dir.
+				 */
+				path: "./news",
+			},
+		],
+	],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      // Replace with your project's social card
-      // image: 'img/social-card-img.jpg',
-      colorMode: {
-        defaultMode: 'dark',
-        disableSwitch: true,
-        respectPrefersColorScheme: false
-      },
-      navbar: {
-        title: 'KinsonDigital',
-        logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
-        },
-        items: [
-            {
-                label: 'News', to: '/news', position: 'left',
-            },
-          {
-            href: 'https://github.com/KinsonDigital',
-            position: 'right',
-            className: "header-github-link"
-          },
-          {
-            href: 'https://discord.gg/qewu6fNgv7',
-            position: 'right',
-            className: "header-discord-link"
-          },
-          {
-            href: 'https://twitter.com/KDCoder',
-            position: 'right',
-            className: "header-twitter-link"
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'GitHub (KinsonDigital)',
-                href: 'https://github.com/KinsonDigital',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discord.gg/qewu6fNgv7',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/KDCoder',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} KinsonDigital`,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-      },
-    }),
+	themeConfig:
+		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+		({
+			// Replace with your project's social card
+			// image: 'img/social-card-img.jpg',
+			colorMode: {
+				defaultMode: "dark",
+				disableSwitch: true,
+				respectPrefersColorScheme: false,
+			},
+			navbar: {
+				title: "KinsonDigital",
+				logo: {
+					alt: "My Site Logo",
+					src: "img/logo.svg",
+				},
+				items: [
+					{
+						label: "News",
+						to: "/news",
+						position: "left",
+					},
+					{
+						href: "https://github.com/KinsonDigital",
+						position: "right",
+						className: "header-github-link",
+					},
+					{
+						href: "https://discord.gg/qewu6fNgv7",
+						position: "right",
+						className: "header-discord-link",
+					},
+					{
+						href: "https://twitter.com/KDCoder",
+						position: "right",
+						className: "header-twitter-link",
+					},
+				],
+			},
+			footer: {
+				style: "dark",
+				links: [
+					{
+						title: "Community",
+						items: [
+							{
+								label: "GitHub (KinsonDigital)",
+								href: "https://github.com/KinsonDigital",
+							},
+							{
+								label: "Discord",
+								href: "https://discord.gg/qewu6fNgv7",
+							},
+							{
+								label: "Twitter",
+								href: "https://twitter.com/KDCoder",
+							},
+						],
+					},
+					{
+						title: "More",
+						items: [
+							{
+								label: "Blog",
+								to: "/",
+							},
+						],
+					},
+				],
+				copyright: `Copyright © ${new Date().getFullYear()} KinsonDigital`,
+			},
+			prism: {
+				theme: lightCodeTheme,
+				darkTheme: darkCodeTheme,
+			},
+		}),
 };
 
 module.exports = config;
