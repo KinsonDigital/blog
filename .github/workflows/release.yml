@@ -44,7 +44,7 @@ jobs:
     - name: Setup NodeJS
       uses: actions/setup-node@v3
       with:
-        node-version: 18.14.2
+        node-version: ${{ vars.NODE_VERSION }}
 
     - name: Setup YARN
       run: npm install --global yarn
