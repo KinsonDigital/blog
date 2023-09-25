@@ -14,7 +14,7 @@ const config = {
   url: 'https://your-docusaurus-test-site.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/blog/',
+  baseUrl: '/blog',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -49,6 +49,30 @@ const config = {
     ],
   ],
 
+    // ...
+    plugins: [
+        [
+            '@docusaurus/plugin-content-blog',
+            {
+                /**
+                 * Required for any multi-instance plugin
+                 */
+                id: 'news',
+
+                /**
+                 * URL route for the blog section of your site.
+                 * *DO NOT* include a trailing slash.
+                 */
+                routeBasePath: 'news',
+
+                /**
+                 * Path to data on filesystem relative to site dir.
+                 */
+                path: './news',
+            },
+        ],
+    ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -66,6 +90,9 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
+            {
+                label: 'News', to: '/news', position: 'left',
+            },
           {
             href: 'https://github.com/KinsonDigital',
             position: 'right',
