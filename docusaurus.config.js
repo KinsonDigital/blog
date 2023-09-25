@@ -94,6 +94,16 @@ const config = {
 						label: "News",
 						to: "/news",
 						position: "left",
+						items: [
+							{
+								label: "All",
+								to: "/news",
+							},
+							{
+								label: "stuff",
+								to: "/news/tags/kd-org",
+							}
+						]
 					},
 					{
 						href: "https://github.com/KinsonDigital",
@@ -135,6 +145,10 @@ const config = {
 					{
 						title: "More",
 						items: [
+							{
+								label: "News",
+								to: "/news",
+							},
 							{
 								label: "Blog",
 								to: "/",
