@@ -77,7 +77,41 @@ const config = {
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
 			// Replace with your project's social card
-			// image: 'img/social-card-img.jpg',
+			image: 'img/meta-image.png',
+			metadata: [
+				{
+				  name: 'twitter:card',
+				  content: 'summary'
+				},
+				{
+				  name: 'twitter:title',
+				  content: 'KinsonDigital Blog'
+				},
+				{
+				  name: 'twitter:description',
+				  content: 'Blogging about technology, software development, and game development.'
+				},
+				{
+				  name: 'twitter:image',
+				  content: 'https://docs.velaptor.io/img/meta-image.png'
+				},
+				{
+				  name: 'twitter:image:alt',
+				  content: 'KinsonDigital Blog'
+				},
+				{
+				  name: 'twitter:site',
+				  content: '@KDCoder'
+				},
+				{
+				  name: 'twitter:creator',
+				  content: '@KDCoder'
+				},
+				{
+				  name: 'keywords',
+				  content: 'Software Development, Software, Game, Game Development, C#, .NET, Technology, Programming, Coding, Tech'
+				}
+			],
 			colorMode: {
 				defaultMode: "dark",
 				disableSwitch: true,
@@ -100,7 +134,7 @@ const config = {
 								to: "/news",
 							},
 							{
-								label: "stuff",
+								label: "KD Org",
 								to: "/news/tags/kd-org",
 							}
 						]
