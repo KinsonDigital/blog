@@ -64,24 +64,24 @@
 }
 
 
-/* Twitter Logo for navbar link */
-.header-twitter-link:hover:after {
+/* X Logo for navbar link */
+.header-x-link:hover:after {
     opacity: 0.6;
 }
 
-.header-twitter-link:after {
+.header-x-link:after {
     /* transition: opacity 0.2s; */
     content: "";
     width: 48px;
     height: 48px;
     display: flex;
-    background-image: url("../../static/img/twitter-logo.svg");
+    background-image: url("../../static/img/x-logo.svg");
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 12px;
 }
 
-.header-twitter-link:after, .header-twitter-link:after {
+.header-x-link:after, .header-x-link:after {
     border-style: none !important;
     margin-left: -5px !important;
 }

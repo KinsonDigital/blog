@@ -5,7 +5,7 @@ authors: kinson
 tags: [deno, cicd, scripting, workflow, github action]
 ---
 
-import { URL } from '@site/src/components/URL';
+import URL from '@site/src/components/URL';
 
 <br/>
 <div align="center">
@@ -258,7 +258,7 @@ If you try to execute a script without explicitly allowing access to certain ope
 with a descriptive message explaining exactly what permission is needed and why.
 
 :::info DENO PERMISSIONS
-Go to the <URL link="deno.land/manual/getting_started/permissions" text="Deno Permissions"/> documentation for more info.
+Go to the <URL link="docs.deno.com/runtime/manual/basics/permissions" text="Deno Permissions"/> documentation for more info.
 :::
 
 That's it!!  Very simple and the only limit is your imagination!!
@@ -274,7 +274,7 @@ your CICD process.  I have personally been using this all over my organization a
 
 - <URL link="https://deno.land/" text="Deno"/>
 
-    - <URL link="deno.land/manual/getting_started/permissions" text="Permissions"/>
+    - <URL link="docs.deno.com/runtime/manual/basics/permissions" text="Permissions"/>
     - <URL link="deno.land/std" text="Standard Library"/>
     - <URL link="deno.land/x" text="Third Party Modules"/>
 
@@ -282,7 +282,8 @@ your CICD process.  I have personally been using this all over my organization a
 - <URL link="regex101.com/" text="Regex101"/>
 - <URL link="www.rust-lang.org/" text="Rust"/>
 
-<details closed><summary>Full TypeScript Source</summary>
+<details closed>
+    <summary>Full TypeScript Source</summary>
 
 ```ts
 if (Deno.args.length != 1) {
@@ -305,7 +306,8 @@ if (branchNameRegEx.test(branchName)) {
 ```
 </details>
 
-<details closed><summary>Full Workflow Source</summary>
+<details closed>
+    <summary>Full Workflow Source</summary>
 
 ```yml
 name: ✅Branch Status Check
@@ -333,4 +335,4 @@ jobs:
 </details>
 
 If you have any questions, want to chat, or contribute to any of my open-source projects, feel free to reach out
-to me on our discord channel or Twitter located at the top right.
+to me on our discord channel or X located at the top right.

@@ -14,15 +14,14 @@ interface Params {
  * @param params The parameters for the component.
  * @returns The component.
  */
-export function URL(param: Params) {
-  const link = param.link.startsWith("https://")
-    ? param.link
-    : `https://${param.link}`;
+const URL: React.FC<Params> = ({link, text}: Params) => {
+   link = link.startsWith("https://")
+    ? link
+    : `https://${link}`;
 
-  const text =
-    param.text === undefined || param.text === null || param.text === ""
+   text = text === undefined || text === null || text === ""
       ? link
-      : param.text;
+      : text;
 
   return (
     <a href={link} target="_blank" rel="noopener noreferrer" className="link">
@@ -33,3 +32,5 @@ export function URL(param: Params) {
     </a>
   );
 }
+
+export default URL;

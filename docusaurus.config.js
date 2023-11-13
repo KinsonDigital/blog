@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const {themes} = require('prism-react-renderer');
+const lightTheme = themes.github;
+const darkTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -150,9 +151,9 @@ const config = {
 						className: "header-discord-link",
 					},
 					{
-						href: "https://twitter.com/KDCoder",
+						href: "https://x.com/KDCoder",
 						position: "right",
-						className: "header-twitter-link",
+						className: "header-x-link",
 					},
 				],
 			},
@@ -171,8 +172,8 @@ const config = {
 								href: "https://discord.gg/qewu6fNgv7",
 							},
 							{
-								label: "Twitter",
-								href: "https://twitter.com/KDCoder",
+								label: "X",
+								href: "https://x.com/KDCoder",
 							},
 						],
 					},
@@ -193,8 +194,9 @@ const config = {
 				copyright: `Copyright © ${new Date().getFullYear()} KinsonDigital`,
 			},
 			prism: {
-				theme: lightCodeTheme,
-				darkTheme: darkCodeTheme,
+				additionalLanguages: ["bash", "diff", "json"], 
+				theme: lightTheme,
+				darkTheme: darkTheme,
 			},
 		}),
 };
