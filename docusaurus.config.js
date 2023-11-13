@@ -151,9 +151,9 @@ const config = {
 						className: "header-discord-link",
 					},
 					{
-						href: "https://twitter.com/KDCoder",
+						href: "https://x.com/KDCoder",
 						position: "right",
-						className: "header-twitter-link",
+						className: "header-x-link",
 					},
 				],
 			},
@@ -172,8 +172,8 @@ const config = {
 								href: "https://discord.gg/qewu6fNgv7",
 							},
 							{
-								label: "Twitter",
-								href: "https://twitter.com/KDCoder",
+								label: "X",
+								href: "https://x.com/KDCoder",
 							},
 						],
 					},
