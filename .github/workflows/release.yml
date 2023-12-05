@@ -61,7 +61,7 @@ jobs:
       run: yarn build
 
     - name: Setup Pages
-      uses: actions/configure-pages@v3 # https://github.com/marketplace/actions/configure-github-pages
+      uses: actions/configure-pages@v4 # https://github.com/marketplace/actions/configure-github-pages
 
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v2.0.0
