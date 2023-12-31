@@ -125,7 +125,7 @@ const config = {
 			navbar: {
 				title: "KinsonDigital",
 				logo: {
-					alt: "My Site Logo",
+					alt: "Site Logo",
 					src: "img/logo.svg",
 				},
 				items: [
