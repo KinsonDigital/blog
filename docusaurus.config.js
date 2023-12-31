@@ -141,6 +141,10 @@ const config = {
 							{
 								label: "KD Org",
 								to: "/news/tags/kd-org",
+							},
+							{
+								label: "Releases",
+								to: "/news/tags/releases",
 							}
 						]
 					},
