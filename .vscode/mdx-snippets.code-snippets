@@ -48,13 +48,21 @@
 		],
 		"description": "Bold Text"
 	},
-	"Section": {
+    "Section": {
 		"scope": "mdx",
 		"prefix": "section",
 		"body": [
 			"## <span class=\"color-section\">${1: description}</span>\n\n$3"
 		],
 		"description": "Section"
+	},
+	"Truncate": {
+		"scope": "mdx",
+		"prefix": "truncate",
+		"body": [
+			"{/*truncate*/}"
+		],
+		"description": "Blog Post Truncate"
 	},
 	"Sub-Section": {
 		"scope": "mdx",
