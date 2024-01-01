@@ -148,4 +148,19 @@
 		],
 		"description": "A new URL component with text."
 	},
+    "Details": {
+		"scope": "mdx",
+		"prefix": "details",
+		"body": [
+            "<details closed>",
+            "<summary>",
+            "${1: title}",
+            "</summary>",
+            "",
+            "ADD CONTENT HERE",
+            "",
+            "</details>",
+		],
+		"description": "A new URL component with text."
+	},
 }
