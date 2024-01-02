@@ -24,8 +24,13 @@ jobs:
       with:
         deno-version: ${{ vars.DENO_VERSION  }}
 
-    - name: Setup Docusaurus
-      run: yarn install
+    - name: Setup PNPM (${{ vars.PNPM_VERSION }})
+      uses: pnpm/action-setup@v2
+      with:
+        version: ${{ vars.PNPM_VERSION }}
 
-    - name: "Build"
-      run: yarn build
+    - name: Setup Docusaurus
+      run: pnpm install
+
+    - name: Build
+      run: pnpm build
