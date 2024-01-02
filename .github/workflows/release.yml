@@ -46,11 +46,13 @@ jobs:
       with:
         node-version: ${{ vars.NODE_VERSION }}
 
-    - name: Setup YARN
-      run: npm install --global yarn
+    - name: Setup PNPM (${{ vars.PNPM_VERSION }})
+      uses: pnpm/action-setup@v2
+      with:
+        version: ${{ vars.PNPM_VERSION }}
 
     - name: Setup Docusaurus
-      run: yarn install
+      run: pnpm install
 
     - name: Setup Deno
       uses: denoland/setup-deno@v1
@@ -58,7 +60,7 @@ jobs:
         deno-version: ${{ vars.DENO_VERSION  }}
 
     - name: Build Site
-      run: yarn build
+      run: pnpm build
 
     - name: Setup Pages
       uses: actions/configure-pages@v4 # https://github.com/marketplace/actions/configure-github-pages
