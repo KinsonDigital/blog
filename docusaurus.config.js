@@ -24,7 +24,11 @@ const config = {
 
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
-
+	// Used for creating diagrams
+	markdown: {
+		mermaid: true,
+	},
+	themes: ['@docusaurus/theme-mermaid'],
 	// Even if you don't use internalization, you can use this field to set useful
 	// metadata like html lang. For example, if your site is Chinese, you may want
 	// to replace "en" with "zh-Hans".
@@ -121,7 +125,7 @@ const config = {
 			navbar: {
 				title: "KinsonDigital",
 				logo: {
-					alt: "My Site Logo",
+					alt: "Site Logo",
 					src: "img/logo.svg",
 				},
 				items: [
@@ -137,6 +141,10 @@ const config = {
 							{
 								label: "KD Org",
 								to: "/news/tags/kd-org",
+							},
+							{
+								label: "Releases",
+								to: "/news/tags/releases",
 							}
 						]
 					},
