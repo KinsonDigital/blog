@@ -48,13 +48,21 @@
 		],
 		"description": "Bold Text"
 	},
-	"Section": {
+    "Section": {
 		"scope": "mdx",
 		"prefix": "section",
 		"body": [
 			"## <span class=\"color-section\">${1: description}</span>\n\n$3"
 		],
 		"description": "Section"
+	},
+	"Truncate": {
+		"scope": "mdx",
+		"prefix": "truncate",
+		"body": [
+			"{/*truncate*/}"
+		],
+		"description": "Blog Post Truncate"
 	},
 	"Sub-Section": {
 		"scope": "mdx",
@@ -137,6 +145,21 @@
 		"prefix": "url-comp-text",
 		"body": [
 			"<URL link=\"${1: link-here}\" text=\"${2: text-here}\"/>",
+		],
+		"description": "A new URL component with text."
+	},
+    "Details": {
+		"scope": "mdx",
+		"prefix": "details",
+		"body": [
+            "<details closed>",
+            "<summary>",
+            "${1: title}",
+            "</summary>",
+            "",
+            "ADD CONTENT HERE",
+            "",
+            "</details>",
 		],
 		"description": "A new URL component with text."
 	},
