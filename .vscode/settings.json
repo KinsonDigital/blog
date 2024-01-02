@@ -1,7 +1,10 @@
 {
 	"cSpell.words": [
 		"CICD",
+		"clsx",
 		"Kinson",
+		"preinstall",
+		"typecheck",
 		"Velaptor"
 	],
 	"files.exclude": {
