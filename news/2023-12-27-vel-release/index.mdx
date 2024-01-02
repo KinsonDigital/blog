@@ -8,27 +8,46 @@ tags: [releases, velaptor]
 import URL from "@site/src/components/URL";
 
 
-## <span class="color-section">Introduction</span>
+## <span class="color-section">New Velaptor Release</span>
 
-Welcome to the latest update on our exciting 2D game development framework <URL link='https://github.com/KinsonDigital/Velaptor' text='Velaptor'/>!
+Welcome to the new exciting and latest update on our 2D game development framework <URL link='https://github.com/KinsonDigital/Velaptor' text='Velaptor'/>!
 We're thrilled to announce that our newest release is now live which consists of some bug fixes, technical debt cleanup, updates
 to the CICD system, deprecation of the UI controls API, and some other developer experience items.
 
 But the most exciting part of this release is the performance improvements due to updating to dotnet 8 as well as vastly
 improving the performance of the keyboard input system.
 
+We invite you to check out the [release notes](https://github.com/KinsonDigital/Velaptor/releases/tag/v1.0.0-preview.31)
+to inform yourself of the changes.
+
+A quick thanks to the following contributors for their contributions to this release:
+- [@AndreBonda](https://github.com/AndreBonda)
+- [@map-b](https://github.com/map-b)
+
+We appreciate your help and support in making Velaptor better!
+
 {/*truncate*/}
 
-When it comes to game development, performance is very important. With game development libraries it becomes even more
-important than the development of the game itself. Why is this?  Game libraries such as game frameworks,
-game engines, and other types of libraries used to develop games are developer tools. These tools are used directly in
-the game and their performance characteristics directly affect the performance of the game. The more performant the library,
-the more "bandwidth" you are giving to the game developer for each frame of the game.
 
-This is why we will always take performance very seriously with Velaptor. We not only write code to be performant while
-we develop new features and make changes, but we also will take the time to further improve existing features and systems
-in Velaptor.
+## <span class="color-section">Introduction</span>
 
+Imagine you're playing a game. The graphics are stunning, the storyline is captivating, and the gameplay is immersive.
+But every few seconds, the game stutters. The frame rate drops, the controls become unresponsive, and the whole experience is ruined.
+Frustrating, isn't it?
+
+This is why performance is so important in game development. It's the invisible thread that weaves the entire gaming
+experience together. And when it comes to game development libraries, performance isn't just important - it's critical.
+
+Why, you ask? Game libraries are the tools that developers use to build games. They're the foundation upon which the entire
+game is built. If the foundation is shaky, the whole structure suffers. The more performant the library, the more "room" a
+game developer has to create a smooth and responsive game.
+
+At [Velaptor](https://github.com/KinsonDigital/Velaptor), we understand this.
+We don't just write performant code - we live and breathe it. We're constantly looking for ways to improve, to squeeze out
+every last drop of performance. Because we know that every millisecond counts. And we're committed to giving you, the game developer,
+the best tools possible to create the best games possible.
+
+So let's dive into the performance improvements in this release of Velaptor!
 
 ## <span class="color-section">Performance improvements</span>
 
@@ -45,14 +64,19 @@ allocations that were occurring during the collection of the state.
 When developing games with garbage-collected languages such as C#, you have to take memory allocations into account.
 The more memory you allocate on the heap during the game loop, the more often your game could trigger garbage collection.
 
-:::info NOTE
-Garbage collection is a process that runs in the background of your application and cleans up memory that is no longer
-being used. This process can be expensive when it comes to the time constraints of video games. This is not to say that
-garbage collection is bad in video games, it is just that too many collections that affect the performance of YOUR game can
-be problematic.
+:::info A NOTE ABOUT GARBAGE COLLECTION
+In game development, especially in languages like C# that use garbage collection, managing memory allocations is crucial.
+Allocating too much memory during the game loop can trigger frequent garbage collections, which can negatively impact game performance.
+
+The garbage collector cleans up memory that is no longer being used, but this process can be expensive in terms of time,
+which is a critical resource in game development. Therefore, reducing memory allocations and managing them efficiently is
+an important aspect of game development in C# or any other garbage-collected language.
+
+This is not to say that garbage collection is bad in video games, it is just that too many collections that affect
+the performance of YOUR game can be problematic.
 :::
 
-C# is a great choice for game development and has a lot of successful 2D and 3D games that have been developed with it.
+C# is a great choice for game development and has a lot of successful 2D and 3D game titles that have been developed with it.
 
 
 ## <span class="color-section">Performance tools used</span>
@@ -70,10 +94,10 @@ they would be for others. Remember, not all games are created equal and some gam
 mentioned before, these efforts matter because our goal is to not be the bottleneck for your game. The gains here are always
 about and will always be about giving you more "bandwidth" to work with as well as reducing allocations.
 
-It was important to improve these _**classes**_ and _**structs**_ because they are used in the game loop of 99% of games.
-These types were great candidates for improvement.
+It was important to improve the _**classes**_ and _**structs**_ related to keyboard input because they are used in the
+game loop of 99% of games. These types were great candidates and an easy win regarding performance improvements.
 
-The types that were improved were `KeyboardState`, `MouseState`, and `Keyboard`. When measuring performance, it is important to
+The types that were improved were `KeyboardState`, and `Keyboard`. When measuring performance, it is important to
 get a good baseline before making any changes. So we created a <URL link="https://github.com/KinsonDigital/Velaptor/tree/preview/Performance/KeyboardPerf" text="performance project"/>
 to accomplish this.
 
@@ -82,7 +106,7 @@ to accomplish this.
 Baseline Performance Results
 </summary>
 
-These are the baseline results for the `KeyboardState` and `Keyboard` types.
+These are the baseline results for the `Keyboard` and `KeyboardState` types.
 
 | Method                                  | Mean     | Memory Allocations |
 |---------------------------------------- |---------:|-------------------:|
@@ -105,19 +129,19 @@ These are the baseline results for the `KeyboardState` and `Keyboard` types.
 | Keyboard.GetState                       | 3.230 us |             8.2 KB |
 </details>
 
+Now, let's put these numbers into perspective. Imagine each frame as a "bandwidth" that you're working with.
+This analogy can help us understand how different parts of your game might impact the overall performance. 
 
-As you can see, many games would probably be ok with these results if you had a simple game or more importantly did not have 
-a lot of input-related code. The time unit of measurement here is in microseconds. A microsecond is 1 millionth of a second.
-Though this might seem like a small amount of time, it can add up quickly. This of course depends on the type of game you are
-building. There are other things in the game loop besides collecting the state of the keyboard and mouse.
-You would be surprised how quickly those things can add up.
+Consider a game running at 60 frames per second. This gives you a budget of 16.67 milliseconds for each frame.
+When you convert that into microseconds, it's only 16,660 microseconds. That might seem like a lot, but it can add up quickly.
 
-One way I like to think of it is that every frame is a "bandwidth" that you are working with. This helps put things into perspective
-in regards to how certain parts of your game might affect everything else. If the game was running at 60 frames per second,
-then you have 16.67 milliseconds to work with. If you were to convert this into microseconds, you would have 16,660 microseconds
-to work with for the entire frame. That number does not sound so great when you could have many other things in your game
-that need some of that frame bandwidth. Now if you were to get the performance down into the nanosecond range, then you would
-have 16,660,000 nanoseconds to work with per frame.
+Suddenly, the time budget doesn't seem so generous, does it? Especially when you consider that your game might have
+many other processes that need a slice of that frame bandwidth. 
+
+But what if we could reduce the performance down to the nanosecond range? Then you'd have a whopping 16,660,000
+nanoseconds to work with per frame. Now that's a number we can work with!
+
+This is why every microsecond counts.
 
 <details closed>
 <summary>
@@ -147,11 +171,11 @@ Here are the results after all of the improvements were made.
 | Keyboard.GetState                       | 591.791 ns |    2752 B |
 </details>
 
-The results are impressive. Notice that the timescale has changed from 'us' to 'ns'. The acronym 'ns' stands for nanoseconds which
-are 1 billionth of a second. This is a very small amount of time. At this scale, there are 16,660,000 nanoseconds in a
-single frame. This is huge!!  Another thing to notice is the huge amount of reduction in memory allocations.
+The results are impressive. Notice that the timescale has changed from 'us' to 'ns'.
+The acronym 'ns' stands for nanoseconds which are 1 billionth of a second. This is a very small amount of time.
+This is huge!! Also, notice the huge amount of reduction in memory allocations.
 
-To help put this improvement into perspective, refer to the table below with the time scale of the baseline
+To help put this improvement into perspective, refer to the comparison table below with the time scale of the baseline
 converted into nanoseconds.
 
 <details closed>
@@ -182,7 +206,7 @@ Processing time comparison before and after the improvements.
 | Keyboard.GetState                       |     3230 ns | 591.791 ns |           81.68% |
 </details>
 
-The average improvement of 98.25% across the board for keyboard input.
+This results in an average improvement of 98.25% across the board for keyboard input.
 
 <details closed>
 <summary>
@@ -231,67 +255,49 @@ register on the char.
 </details>
 
 
-## <span class="color-section">Performance improvement methods</span>
+## <span class="color-section">How did we do it?</span>
 
-How did we get these performance gains?  Well, after looking at how the `KeyboardState`
-struct and `Keyboard` class were implemented, and we also noticed that some unnecessary
-allocations were being done when collecting the state of the keyboard.  For every frame,
-a new instance of the `KeyboardState` struct was created.  Internally in the
-struct, the state of the keyboard was represented by a `Dictionary` of the keys
-and the down state of each key.  This dictionary was lazily being created when any of the struct
-methods were being invoked.  The original idea at the time of creation was that it would
-only be created once but we failed to notice that the `KeyboardState` struct was being
-constructed every single frame.
+You might be wondering, how did we achieve such significant performance gains? Let's dive into the details.
+We began with the `KeyboardState` struct and `Keyboard` class. We noticed some
+unnecessary allocations happening every frame when collecting the keyboard state. A new instance of the `KeyboardState`
+struct was being created for each frame, and within this struct, the keyboard state was represented by
+a `Dictionary` of keys and the down state. This dictionary was lazily created whenever any of the struct methods were invoked. 
 
-This means that the `Dictionary` was being constructed every frame.  To avoid this,
-we created a service that continually gets updates to the state of the keyboard every frame
-and since the total number of keyboard keys is known ahead of time, this means that we can
-allocate the dictionary once and reuse it every frame.
+The original intention was to create the dictionary only once, but we overlooked the fact that the `KeyboardState`
+struct was being constructed in every frame. This meant that the `Dictionary` was also being constructed every
+frame, leading to constant reallocations. To tackle this, we introduced a singleton service that continually updates the
+keyboard state every frame.
 
-We also improved and introduced static keyboard state data internally of the public API
-which was used to understand if a key is a letter, modifier, number key, and so on.  Before,
-allocations of an array were being used to "collect" all of the requested keys for processing.
+Since the total number of keyboard keys is known ahead of time, we pre-allocated the dictionary once and reused it every frame.
+We also optimized and introduced static keyboard state data within the public API. These represent groups of
+related keys such as letters, numbers, modifiers, and so on. Previously, allocations of an array were used to "collect"
+all of the requested keys are for processing.
 
-Also, the `KeyboardState` struct dictionary is being allocated with a capacity that is known
-upfront.  This means that the dictionary will not have to be resized as more keys are added
-when setting the state of the keyboard in the struct.
-
-All of these methods and more were used to help not only improve performance but also greatly
-reduce memory allocations.
-
+Moreover, the `KeyboardState` struct dictionary is now allocated with a known capacity upfront.
+This means the dictionary doesn't need to be resized as more keys are added when setting the keyboard state in the struct.
+These strategies, among others, not only improved performance but also significantly reduced memory allocations.
 
 :::note Code changes
-If you are interested in looking at how we improved the performance of the keyboard input system,
-you can check out the <URL link="https://github.com/KinsonDigital/Velaptor/pull/849" text=" pull request here"/>.
+Curious about the nitty-gritty details? Feel free to explore the <URL link="https://github.com/KinsonDigital/Velaptor/pull/849" text=" pull request here"/>
+to see exactly how we improved the performance of the keyboard input system.
 :::
 
 
-## <span class="color-section">Take Velaptor for a spin!</span>
+## <span class="color-section">Join Our Community</span>
 
-We invite you to check out the [release notes](https://github.com/KinsonDigital/Velaptor/releases/tag/v1.0.0-preview.31)
-to inform yourself of the changes. Your feedback is invaluable to us. If you have any comments, questions, or suggestions,
-please don't hesitate to open an issue on our [GitHub repository](https://github.com/KinsonDigital/Velaptor/issues/new/choose).
-We're always looking to improve and your input helps us do just that.
+We believe that everyone has something unique to offer, and we invite you to contribute to [Velaptor](https://github.com/KinsonDigital/Velaptor)
+and the [KinsonDigital](https://github.com/KinsonDigital) organization. Here's how you can get involved:
 
-Happy coding!
+1. **Contribute Your Skills**: Whether you're a seasoned developer or just starting, your skills can make a difference. You can contribute by:
+    - Picking up [issues](https://github.com/KinsonDigital/Velaptor/issues) and submitting pull requests with code improvements, bug fixes, or new features.
+    - Providing feedback, reporting [issues](https://github.com/KinsonDigital/Velaptor/issues/new/choose), or suggesting enhancements through GitHub issues.
 
+2. **Support Us Financially**: If you're in a position to do so, consider supporting us financially. Your contributions can help us cover expenses
+like hosting and infrastructure costs, and support the ongoing development and maintenance of all [KinsonDigital](https://github.com/KinsonDigital) projects.  
+You can donate or sponsor us on:
+    - [GitHub Sponsors](https://github.com/sponsors/KinsonDigital)
+    - [Open Collective](https://opencollective.com/kinsondigital)
 
-## <span class="color-section">Interested in contributing?</span>
-
-If you are interested in helping out, that would be great!!
-
-Here are the ways you can contribute to [Velaptor](https://github.com/KinsonDigital/Velaptor) or the GitHub
-[KinsonDigital](https://github.com/KinsonDigital) organization as a whole:
-
-1. Contribute to the project via time:
-    - You can offer your time and expertise by picking up issues and submitting pull requests
- with code improvements, bug fixes, or new features.
-    - Contribute by providing feedback, reporting issues, or suggesting enhancements through GitHub issues.
-2. If you would like to contribute financially, you can consider donating to the project or
-sponsoring the project on the following platforms:
-    like GitHub Sponsors.
-    
-    
-Contributions via financial and/or investing your time are greatly appreciated and can help support the 
-development and maintenance of all the [KinsonDigital](https://github.com/KinsonDigital) projects, as well
-as cover expenses such as hosting and infrastructure costs.
+Remember, every contribution, no matter how small, is valuable and appreciated. By contributing, you're
+not just helping us, you're helping the entire community by making game development better and more efficient.
+Come, join us on this and be involved in making something amazing together!
