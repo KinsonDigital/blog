@@ -29,6 +29,7 @@ This release of **Velaptor** brings you the following:
 3. The start of the mocking library migration process.
 4. Removal of internal use of deprecated _**Velaptor UI Control API**_.
 5. A small bug fix was discovered during development.
+6. Internal dependency updates.
 
 
 ## <span class="color-section">Perf Improvements</span>
@@ -144,6 +145,15 @@ you would have disposed of the game object using the `Window.Dispose()` method.
 Why would even do that anyway? Either way, it is fixed now and you will
 get a proper `ObjectDisposedException` message if you attempt to do this.
 
+
+## <span class="color-section">Dependency Updates</span>
+
+We keep our dependencies up to date as much as possible. This release is no different.
+
+1. SimpleInjector updated from _**v5.4.3**_ to _**v5.4.4**_.
+    - This is used for all of our dependency injection needs.
+2. SixLabors.ImageSharp updated from _**v3.1.1**_ to _**v3.1.2**_.
+    - This is used for loading image data from disk before being uploaded to the GPU.
 
 ## <span class="color-section">Wrap Up!!</span>
 
