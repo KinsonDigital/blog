@@ -1,0 +1,160 @@
+---
+slug: velaptor-release-v1.0.0-preview.32
+title: Velaptor Release v1.0.0-preview.32
+authors: kinson
+tags: [releases, velaptor]
+---
+
+Hello and welcome to another Velaptor release!!
+
+This release brings you some small performance improvements,
+the start of your mocking library migration, some API deprecations, and some bug fixes.
+
+:::info Release notes
+You can view the release notes [here](https://github.com/KinsonDigital/Velaptor/releases/tag/v1.0.0-preview.32)
+:::
+
+A quick thanks to the following contributors for their contributions to this release:
+- [@AndreBonda](https://github.com/AndreBonda)
+
+{/*truncate*/}
+
+
+## <span class="color-section">Quick Overview</span>
+
+This release of **Velaptor** brings you the following:
+
+1. Small performance improvements related to fonts and rendering text.
+2. Small performance improvement to OpenGL buffering.
+3. The start of the mocking library migration process.
+4. Removal of internal use of deprecated _**Velaptor UI Control API**_.
+5. A small bug fix was discovered during development.
+
+
+## <span class="color-section">Perf Improvements</span>
+
+![fast](https://media.giphy.com/media/fBEMsUeGHdpsClFsxM/giphy.gif)
+
+Performance is always a concern when it comes to game development. We are always looking for ways to improve the performance of **Velaptor**.
+Though these performance changes are very small, they were easy to implement. These changes were related to how we talk to OpenGL and
+converting the `FontStats` struct to a `readonly struct`.
+
+
+## <span class="color-section">Mocking Library Migration</span>
+
+This is not going to affect any users of **Velaptor**, but this will affect contributors and maintainers.
+
+### <span class="color-sub-section">What are we migrating?</span>
+
+This is related to refactoring all of our unit test code from using the [Moq](https://github.com/devlooped/moq)
+library to the [NSubstitute](https://nsubstitute.github.io/) library. This is going to take a while but all of
+the issues related to this are created and ready to go. We will be working on releasing at least one of these issues or more per release.
+:::note Help Wanted
+If you are interested in helping out with this, you can pick any of the issues [here](https://github.com/KinsonDigital/Velaptor/issues?q=is%3Aissue+in%3Atitle+%22%F0%9F%9A%A7Refactor+moq+code+to+nsubstitute%22+-assignee%3ACalvinWilkinson+)  
+There is a chance by the time you read this that all of the work might be complete. If so, the list of issues shown on GitHub will be empty.
+:::
+
+
+### <span class="color-sub-section">Why are we migrating?</span>
+
+The decision to do this is related to multiple factors. I have used the Moq library for mocking for a very long time.
+I know it well and I do like it like so many other dotnet developers. However, the largest and most complicated project
+that I have used it on is _**Velaptor**_. As the project has grown, the verbosity and complexity of the unit tests have
+grown as well. This is not a bad thing, but it does make it harder to maintain and understand.
+
+As time went on, I started looking into NSubstitute. Then one day, some drama hit the Moq community that broke the camel's
+back and I finally decided to make the switch. I am not going to go into details about the drama, but you can it
+[read about it here](https://medium.com/checkmarx-security/popular-nuget-package-moq-silently-exfiltrates-user-data-to-cloud-service-d1888867406d)
+and [watch it here](https://www.youtube.com/watch?v=A06nNjBKV7I).
+
+I have my personal opinions about this subject, but I will keep them to myself. I believe that we are all human
+and no one is perfect. I also believe that it was not intentional and was not intentional. I am switching for more
+reasons than just the drama. I will leave it at that. 😀
+
+
+## <span class="color-section">Deprecated UI Usage Removal</span>
+
+We deprecated the _**Velaptor UI Control API**_ in the last release which was version _**v1.0.0-preview.31**_.
+
+This is related to removing the usage of the deprecated _**Velaptor UI Control API**_ from the internal codebase.
+This does not mean the deprecated API has been removed from _**Velaptor**_ but from the other internal
+projects used to manually test _**Velaptor**_.
+
+We have an internal project that is part of the code base with the name _**VelaptorTesting**_. This project is used
+to manually test _**Velaptor**_ and is not part of the main solution. This project was [dogfooding](https://www.browserstack.com/blog/software-dogfooding/)
+the deprecated UI API to provide a UI to help test _**Velaptor**_ itself.
+
+:::note NOTE
+Changes to this project do not affect
+_**Velaptor**_ in any way.
+:::
+
+We needed to replace the UI in the _**VelaptorTesting**_ project with something else. We decided to use the
+[ImGui.NET](https://github.com/ImGuiNET/ImGui.NET) library to provide a UI for the project.
+This is a popular and battle-tested library and has been around for a long time so was an obvious choice.
+Now that we have replaced the UI API with _**ImGui.NET**_, we are not free to fully remove the deprecated control UI API from the _**Velaptor**_ codebase.
+
+
+### <span class="color-sub-section">Why the deprecation?</span>
+
+This was a big decision for me. I have been thinking about this for a while now. I have decided to deprecate the
+_**Velaptor UI Control API**_.
+
+This is the API that allows you to create UI controls like buttons, text boxes, etc.
+As I was developing the API, I realized how much work it was going to be. I stood back and thought about how maintaining
+a UI library for a game framework where there is no consistent UI design across games was going to be a nightmare.
+
+Another thought I had at the time was that _**Velaptor**_ could be used for more than just games, but to easily create
+cross-platform UI apps as well and that was the original driving force. Though this can technically be done, it is a 
+ton of work. I did not want to sacrifice the quality of the rest of the library for making games. This could be a
+direction I could take in the future, but before we hit v1.0.0 and solidify the API, it would be best to remove it now
+while we are in preview. 
+
+### <span class="color-sub-section">When are we removing it fully?</span>
+
+The API is still usable. It is just marked as deprecated so as you continue to use the API, you will see warnings
+in your preferred IDE/text editor that the API is deprecated. If we were past _**v1.0.0**_ and the user base of the API
+was very high, we would wait a while before removing it. However, since we are still in preview and the user base is
+very low, we will be removing it soon in an upcoming release. Which release we remove it in is still to be determined.
+
+It could be 2 releases from now, or it could be 10. The likelihood that it is being used is very low due to it
+not for game UI but for UI apps.
+
+:::danger Recommendation
+We recommend updating your code as soon as possible.
+:::
+
+
+## <span class="color-section">Bug Squashing!!</span>
+
+Let's be honest. It's a great feeling to squash bugs. It is for me anyway!!
+Especially during development. It feels like you're getting something for free when
+you discover a bug during the development of something else. This is exactly what happened.
+
+Then you also realize that the bug has been sitting there for a long time and you wonder how you missed it,
+or why nobody has complained.
+![bug](https://media.giphy.com/media/EmSCxtcjQCmXK/giphy.gif)
+
+No matter how small or likely the bug, I am always ready with a large boot!!
+Anyways, this bug was quite unlikely to occur. This bug was related 
+an incorrect null reference exception occurring if you were to invoke the
+`Window.Show()` or `Window.ShowAsync()` method to start your game after
+you would have disposed of the game object using the `Window.Dispose()` method.
+
+Why would even do that anyway? Either way, it is fixed now and you will
+get a proper `ObjectDisposedException` message if you attempt to do this.
+
+
+## <span class="color-section">Wrap Up!!</span>
+
+Well, that is it for the release!! If you want to know more details of the changes of any release,
+it is all public and open source!!
+
+If you are interested in contributing to the project, please check out the
+project on GitHub or join the [Discord](https://discord.gg/qewu6fNgv7) server and say hi!!
+We would love to hear from you.
+
+Until the next release!!
+
+![salute](https://media.giphy.com/media/rHR8qP1mC5V3G/giphy.gif)
+
