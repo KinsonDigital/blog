@@ -163,4 +163,28 @@
 		],
 		"description": "A new URL component with text."
 	},
+    "Velaptor Release Frontmatter": {
+        "scope": "mdx",
+        "prefix": "velap-release-frontmatter",
+        "body": [
+            "---",
+            "slug: velaptor-release-${1: version}",
+            "title: Velaptor Release ${1: version}",
+            "authors: kinson",
+            "tags: [releases, velaptor]",
+            "---"
+        ]
+    },
+    "CASL Release Frontmatter": {
+        "scope": "mdx",
+        "prefix": "casl-release-frontmatter",
+        "body": [
+            "---",
+            "slug: casl-release-${1: version}",
+            "title: CASL Release ${1: version}",
+            "authors: kinson",
+            "tags: [releases, casl]",
+            "---"
+        ]
+    }
 }
