@@ -66,7 +66,7 @@ jobs:
       uses: actions/configure-pages@v4 # https://github.com/marketplace/actions/configure-github-pages
 
     - name: Upload Artifact
-      uses: actions/upload-pages-artifact@v3.0.0
+      uses: actions/upload-pages-artifact@v3.0.1
       with:
         path: '${{ github.workspace }}/build'
 
