@@ -6,6 +6,8 @@ tags: [releases, velaptor]
 ---
 
 import JoinComm from "@site/src/components/JoinComm";
+import ReleaseNotes from "@site/src/components/ReleaseNotes";
+import GHProj from "@site/src/components/GHProj";
 
 Hello and welcome to another _**Velaptor**_ release!!
 
@@ -13,7 +15,7 @@ This release brings you some small performance improvements,
 the start of your mocking library migration, some API deprecations, and some bug fixes.
 
 :::info Release notes
-You can view the release notes [here](https://github.com/KinsonDigital/Velaptor/releases/tag/v1.0.0-preview.32)
+Check out the <ReleaseNotes projName="Velaptor" version="v1.0.0-preview.32"/>
 :::
 
 A quick thanks to the following contributors for their contributions to this release:
@@ -56,15 +58,9 @@ This is not going to affect any users of **Velaptor**, but this will affect cont
 
 ### <span class="color-sub-section">Migration Details</span>
 
-This is related to refactoring all of our unit test code from using the [Moq](https://github.com/devlooped/moq)
+This is related to refactoring all of our unit test code from using the <GHProj owner="devlooped" projName="moq"/>
 library to the [NSubstitute](https://nsubstitute.github.io/) library. This is going to take a while but all of
 the issues related to this are created and ready to go. We will be working on releasing at least one of these issues or more per release.
-:::note Help Wanted
-If you are interested in helping out with this, you can pick any of the issues [here](https://github.com/KinsonDigital/Velaptor/issues?q=is%3Aissue+in%3Atitle+%22%F0%9F%9A%A7Refactor+moq+code+to+nsubstitute%22+-assignee%3ACalvinWilkinson+)  
-There is a chance by the time you read this that all of the work might be complete.
-If so, the list of issues shown on GitHub will be empty.
-:::
-
 
 ### <span class="color-sub-section">Rationale Behind the Migration</span>
 
@@ -78,8 +74,8 @@ the verbosity and intricacy of the unit tests. While this is not inherently nega
 pose challenges in terms of maintenance and comprehension.
 
 Over time, I began exploring _**NSubstitute**_ and found it to be a promising alternative as well
-as not as verbose and more readable. A recent incident within the _**Moq**_ community served as the
-catalyst for finally deciding to make the switch.
+as not as verbose and more readable. A recent incident within the _**Moq**_ community was the
+catalyst to finally deciding to make the switch.
 
 For those interested in the specifics of this incident, you can [read about it here](https://medium.com/checkmarx-security/popular-nuget-package-moq-silently-exfiltrates-user-data-to-cloud-service-d1888867406d)
 and [watch it here](https://www.youtube.com/watch?v=A06nNjBKV7I).
@@ -107,7 +103,7 @@ Changes to this project do not affect
 _**Velaptor**_ in any way.
 :::
 
-To replace the UI in the _**VelaptorTesting**_ project, we decided to use the [ImGui.NET](https://github.com/ImGuiNET/ImGui.NET)
+To replace the UI in the _**VelaptorTesting**_ project, we decided to use the <GHProj owner="ImGuiNET" projName="ImGui.NET"/>
 library. This library is a popular and battle-tested solution that has been around for a long time, making it an obvious choice for our needs.
 With the replacement of the UI API with ImGui.NET in the _**VelaptorTesting**_ project, we are now in a position to fully
 remove the deprecated control UI API from the _**Velaptor**_ codebase when the time is right.

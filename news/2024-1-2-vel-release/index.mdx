@@ -7,17 +7,21 @@ tags: [releases, velaptor]
 
 import URL from "@site/src/components/URL";
 import JoinComm from "@site/src/components/JoinComm";
+import GHUrl from "@site/src/components/GHUrl";
+import ReleaseNotes from "@site/src/components/ReleaseNotes";
+import GHProj from "@site/src/components/GHProj";
+import PR from "@site/src/components/PR";
 
 ## <span class="color-section">New Velaptor Release</span>
 
-Welcome to the new exciting and latest update on our 2D game development framework <URL link='https://github.com/KinsonDigital/Velaptor' text='Velaptor'/>!
+Welcome to the new exciting and latest update on our 2D game development framework <GHProj owner='KinsonDigital' projName='Velaptor'/>!
 We're thrilled to announce that our newest release is now live which consists of some bug fixes, technical debt cleanup, updates
 to the CICD system, deprecation of the UI controls API, and some other developer experience items.
 
 But the most exciting part of this release is the performance improvements due to updating to dotnet 8 as well as vastly
 improving the performance of the keyboard input system.
 
-We invite you to check out the [release notes](https://github.com/KinsonDigital/Velaptor/releases/tag/v1.0.0-preview.31)
+We invite you to check out the <ReleaseNotes projName="Velaptor" version="v1.0.0-preview.31"/>
 to inform yourself of the changes.
 
 A quick thanks to the following contributors for their contributions to this release:
@@ -42,7 +46,7 @@ Why, you ask? Game libraries are the tools that developers use to build games. T
 game is built. If the foundation is shaky, the whole structure suffers. The more performant the library, the more "room" a
 game developer has to create a smooth and responsive game.
 
-At [Velaptor](https://github.com/KinsonDigital/Velaptor), we understand this.
+At <GHProj owner='KinsonDigital' projName='Velaptor'/>, we understand this.
 We don't just write performant code - we live and breathe it. We're constantly looking for ways to improve, to squeeze out
 every last drop of performance. Because we know that every millisecond counts. And we're committed to giving you, the game developer,
 the best tools possible to create the best games possible.
@@ -278,11 +282,11 @@ This means the dictionary doesn't need to be resized as more keys are added when
 These strategies, among others, not only improved performance but also significantly reduced memory allocations.
 
 :::note Code changes
-Curious about the nitty-gritty details? Feel free to explore the <URL link="https://github.com/KinsonDigital/Velaptor/pull/849" text=" pull request here"/>
+Curious about the nitty-gritty details? Feel free to explore the <PR projName="Velaptor" prNum="849" urlText="pull request here"/>
 to see exactly how we improved the performance of the keyboard input system.
 :::
 
 
 ## <span class="color-section">Join Our Community</span>
 
-<JoinComm />
+<JoinComm />@site/src/components/GHProj@site/src/components/GHUrl
