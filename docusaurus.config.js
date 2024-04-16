@@ -202,7 +202,7 @@ const config = {
 				copyright: `Copyright © ${new Date().getFullYear()} KinsonDigital`,
 			},
 			prism: {
-				additionalLanguages: ["bash", "diff", "json"], 
+				additionalLanguages: ["bash", "diff", "json", "csharp"], 
 				theme: lightTheme,
 				darkTheme: darkTheme,
 			},
