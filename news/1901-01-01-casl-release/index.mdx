@@ -1,0 +1,139 @@
+---
+slug: casl-release-v1.0.0-preview.18
+title: CASL Release v1.0.0-preview.18
+authors: kinson
+tags: [releases, casl]
+---
+
+import URL from "@site/src/components/URL";
+import JoinComm from "@site/src/components/JoinComm";
+import ReleaseNotes from "@site/src/components/ReleaseNotes";
+
+Hello and welcome to another _**CASL**_ release!!
+
+This release comes with some new features, a bug fix, and quite a few breaking changes.
+
+Breaking changes!! Yes, you read that right. We have made some breaking changes to the API in order
+to make it more consistent and easier to use and to help solidify the public API before the release
+of version `v1.0.0`.
+
+:::info Breaking Changes Reminder
+Remember, we are in preview!! So, breaking changes are expected, and also encouraged.
+This is an opportunity to fix any issues and make the API better before the final release.
+Better now than in a production release.  😀
+
+We add all of the breaking changes to the release notes for every release.  So, if you are
+upgrading, make sure to check the <ReleaseNotes projName="CASL" version="v1.0.0-preview.18"/>
+for any breaking changes. You can also check out the project on <URL link="github.com/kinsondigital/casl" text="GitHub"/>
+All issues and associated pull requests are labeled and documented as well as organized into
+milestones.  It is very easy to find what you are looking for.
+:::
+
+
+So let's get to it!!
+
+{/*truncate*/}
+
+
+## Give me the info!!
+
+The biggest feature of this release has been the long-awaited ability to have audio playback
+streamed.  Yep, finally. 😴
+
+This feature was a doozy to implement. A decent amount of changes, education, and debugging
+had to go into this release so we could implement this.
+
+But, what is "audio streaming"?  Also, what was it doing before this release?  Well, in the world of
+audio, there is data and a lot of it.  There is a reason why audio and video files are so large,
+and also why compression formats are so common in the world of media.
+
+## What was it doing before?
+
+Before this release, when you wanted to play audio, the entire audio file was loaded into memory.
+From that point on, the audio hardware was taking over and the audio was in the audio hardware's memory.
+CASL would send various OpenAL commands to tell the audio hardware what to do, and the audio hardware
+would do it.
+
+The problem with this was that _**ALL**_ of the audio data was loaded into memory.  Though this works
+perfectly fine, it comes with some downsides.  The downside is the amount of time it would take
+to load all of the audio data if your application had a lot of audio files.  This would lead to bad
+loading performance and also hog all that precious memory that you might need.
+
+Think of a video game.  You have a scene with a lot of sound effects and various music tracks.
+You try to load the scene and it grinds to a halt because all of the audio data is being loaded
+at once before use.  Uuuuhhh...not fun.  Who has time for this?
+
+## What is streaming?
+
+So, what is audio streaming?  Audio streaming is the ability to load audio data in chunks.
+For example, you could have the 1 second worth of audio data loaded.  As the audio is playing,
+it detects when it gets to the end of that chunk of data.  At that point, it loads the next chunk
+of 1-second data, cleans up the previous chunk, and continues playing.
+
+The benefit of this is that the playback of the audio only loads what is needed when it is needed.
+This means that without needing to load 3.5mb worth of data, maybe it only loads 1 kb.  This means
+almost instant loading of any audio content.
+
+But this also has some downsides.  Nothing comes for free you know.  The downside to streaming 
+is the performance of the playback operations that are performed.  For example, let's say
+I have an audio file that is 5 minutes long.  When I tell the audio to jump from position 30 seconds
+to 4 minutes, it has to perform some operations to figure out where in the data it needs to jump to
+as well as other technical operations such as decoder operations and more.  Due to this, it is not
+quite as fast to pause, play, or jump around in the audio data as it would be if it was all loaded
+and ready to go.
+
+## When to use full vs stream buffering?
+
+The usual rule of thumb is that if the audio is very short and needs to be played in quick succession,
+use full buffering.  In the world of video games, this is usually sound effects.  If you have
+a laser beam being shot from a ship, the user usually wants to shoot as fast as possible.
+Each fire of the weapon requires the playing of the sound effect.  Do it is ideal to reduce
+and playback lag as much as possible and use full buffering.
+
+If you have a long audio track, such as background music, it is ideal to use streaming. This way
+when a scene is loaded, you don't have to wait for the audio to load before it starts playing.
+Also, when performing playback operations on background music, the need for playback operation performance
+is not required.
+
+The above examples are just to give you an idea of the use cases for each type.  As with all
+software, it depends on what you are doing.
+
+:::tip  Remember
+CASL is not just for games.  You can use it to create any type of audio application!!
+:::
+
+## Quick example
+
+Playing sound with CASL is super easy.  All you need is a `.mp3` or `.ogg` file and you are good to go.
+
+Full buffering:
+```csharp
+// Fully loaded audio data
+var filePath = "C:/path/to/audio.mp3";
+
+var audio = new Audio(filePath, BufferType.Full);
+audio.Play();
+```
+Stream buffering:
+```csharp
+// Stream audio data
+var filePath = "C:/path/to/audio.mp3";
+
+var audio = new Audio(filePath, BufferType.Full);
+audio.Play();
+```
+
+That is it!! Super easy right? Just choose what type of buffering you want and everything
+else is handled for you.
+
+All of the other features are easy to use as well.  To play around with a sample application
+that shows off all of the features, you can use the <URL link="github.com/kinsondigital/casl-samples" text="CASLTesting"/> project.
+
+This project is just a CLI application that is used for manually testing _**CASL**_.  But it is great
+for trying out the different features from a non-code perspective.
+
+That's it for this release!!  Enjoy
+
+## <span class="color-section">Join Our Community</span>
+
+<JoinComm />
