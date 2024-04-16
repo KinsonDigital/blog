@@ -7,9 +7,9 @@ import JoinCommunity from "../join-comm.mdx";
  * @returns The component.
  */
 const MarkdownComp: React.FC = () => {
-  return (
-    <JoinCommunity/>
-  );
+    return (
+        <JoinCommunity />
+    );
 }
 
 export default MarkdownComp;
