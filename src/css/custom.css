@@ -29,21 +29,21 @@
 }
 
 .link {
-	color: #a384ee;
+    color: #a384ee;
 }
 
 .color-section {
     color: #58BFE8;
     font-weight: bold;
 }
-  
+
 .color-sub-section {
     color: #abc7d2;
 }
 
 /* Discord Logo for navbar link */
 .header-discord-link:hover:after {
-  opacity: 0.6;
+    opacity: 0.6;
 }
 
 .header-discord-link:after {
@@ -58,7 +58,8 @@
     margin-right: 12px;
 }
 
-.header-discord-link:after, .header-discord-link:after {
+.header-discord-link:after,
+.header-discord-link:after {
     border-style: none !important;
     margin-left: -5px !important;
 }
@@ -81,7 +82,8 @@
     margin-right: 12px;
 }
 
-.header-x-link:after, .header-x-link:after {
+.header-x-link:after,
+.header-x-link:after {
     border-style: none !important;
     margin-left: -5px !important;
 }
@@ -104,7 +106,14 @@
     margin-right: 12px;
 }
 
-[data-theme='dark'] .header-github-link:after, .header-github-link:after {
+[data-theme='dark'] .header-github-link:after,
+.header-github-link:after {
     border-style: none !important;
     margin-left: -5px !important;
+}
+
+.center-horiz {
+    margin: 0 auto;
+    width: 50%;
+    /* Or any desired width */
 }
