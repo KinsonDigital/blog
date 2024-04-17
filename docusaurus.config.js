@@ -143,9 +143,17 @@ const config = {
 								to: "/news/tags/kd-org",
 							},
 							{
-								label: "Releases",
+								label: "Velaptor Releases",
+								to: "/news/tags/velaptor",
+							},
+							{
+								label: "CASL Releases",
+								to: "/news/tags/casl",
+							},
+							{
+								label: "All Releases",
 								to: "/news/tags/releases",
-							}
+							},
 						]
 					},
 					{
@@ -202,7 +210,7 @@ const config = {
 				copyright: `Copyright © ${new Date().getFullYear()} KinsonDigital`,
 			},
 			prism: {
-				additionalLanguages: ["bash", "diff", "json"], 
+				additionalLanguages: ["bash", "diff", "json", "csharp"], 
 				theme: lightTheme,
 				darkTheme: darkTheme,
 			},

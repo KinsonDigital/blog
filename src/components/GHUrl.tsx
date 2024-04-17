@@ -14,10 +14,10 @@ interface Params {
  * @param params The parameters for the component.
  * @returns The component.
  */
-const URL: React.FC<Params> = ({ link, text }: Params) => {
-    link = link.startsWith("https://")
+const GHUrl: React.FC<Params> = ({ link, text }: Params) => {
+    link = link.startsWith("https://github.com")
         ? link
-        : `https://${link}`;
+        : `https://github.com/${link}`;
 
     text = text === undefined || text === null || text === ""
         ? link
@@ -31,6 +31,6 @@ const URL: React.FC<Params> = ({ link, text }: Params) => {
             />
         </a>
     );
-}
+};
 
-export default URL;
+export default GHUrl;
