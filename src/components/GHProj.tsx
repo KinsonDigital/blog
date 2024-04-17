@@ -15,17 +15,29 @@ interface Params {
  * @returns The component.
  */
 const GHProj: React.FC<Params> = ({ owner, projName }: Params) => {
-    //github.com/KinsonDigital/CASL/releases/tag/v1.0.0-preview.18
+    const forgotOwnerAttr = owner === undefined || owner === "";
+    const forgotProjNameAttr = projName === undefined || projName === "";
+
     const url = `https://github.com/${owner}/${projName}`;
 
-    return (
-        <a href={url} target="_blank" rel="noopener noreferrer" className="link">
+    if (forgotOwnerAttr) {
+        return (
+            <span style={{color: 'red'}}>'missing-owner-attribute'</span>
+        );
+    } else if (forgotProjNameAttr) {
+        return (
+            <span style={{color: 'red'}}>'missing-projName-attribute'</span>
+        );
+    } else {
+        return (
+            <a href={url} target="_blank" rel="noopener noreferrer" className="link">
             {projName}
             <OpenNewTab
                 style={{ paddingTop: "10", paddingLeft: "0.25%", width: "2%" }}
-            />
-        </a>
-    );
+                />
+            </a>
+        );
+    }
 };
 
 export default GHProj;
