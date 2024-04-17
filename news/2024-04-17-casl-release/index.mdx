@@ -1,0 +1,144 @@
+---
+slug: casl-release-v1.0.0-preview.18
+title: CASL Release v1.0.0-preview.18
+authors: kinson
+tags: [releases, casl]
+---
+
+import URL from "@site/src/components/URL";
+import JoinComm from "@site/src/components/JoinComm";
+import ReleaseNotes from "@site/src/components/ReleaseNotes";
+import GIF from "@site/src/components/GIF";
+
+Hello, and welcome to another _**CASL**_ release!!
+
+This release has new features, a bug fix, and many breaking changes.
+
+Breaking changes!! Yes, you read that right. We have made some breaking changes to the API in order
+to make it more consistent and easier to use and to help solidify the public API before the release
+of version `v1.0.0`.
+
+:::info Breaking Changes Reminder
+Remember, we are in preview!! So, breaking changes are expected and also encouraged.
+Preview releases are an opportunity to fix any issues and improve the API before the final release.
+It's better now than in a production release.  😀
+
+We add all the breaking changes to the release notes for every release. So, if you are
+upgrading, check the <ReleaseNotes projName="CASL" version="v1.0.0-preview.18"/>
+for any breaking changes. You can also check out the project on <URL link="github.com/kinsondigital/casl" text="GitHub"/>
+All issues and associated pull requests are labeled, documented, and organized into
+milestones. It is effortless to find what you are looking for.
+:::
+
+
+So, let's get to it!!
+
+{/*truncate*/}
+
+
+## Ok, let's hear it!!
+
+The biggest feature of this release has been the long-awaited ability to stream audio playback
+. Yep, finally. 😴
+
+This feature was a doozy to implement. A decent amount of changes, education, and debugging
+had to go into this release so we could implement this.
+
+But what is "audio streaming"? Also, what was it doing before this release? Well, in the world of
+audio, there is data and a lot of it. There is a reason why audio and video files are so large
+and also why compression formats are so standard in the world of media.
+
+## What was it doing before?
+
+Before this release, full buffering was the only type of buffering performed.
+From that point on, the audio hardware was taking over, and the audio was in the audio hardware's memory.
+CASL would send various <URL link="https://openal.org/" text="OpenAL"/> commands to tell the audio hardware what to do, and the audio hardware
+would do it.
+
+The problem was that _**ALL**_ of the audio data was loaded into memory. Though this works
+perfectly fine, it comes with some downsides. The downside is the amount of time it would take
+to load all of the audio data if your application had a lot of audio files and were significant in size.
+Full buffering leads to bad loading performance and hogs all that precious memory you might need.
+
+<GIF url="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmZ5eHJuZDlpdG9rbHI3bzRpcXkxeHIxeG5ya3hyaGttb2I3dm8xdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wYCmXZ6RvPdIgnisOJ/giphy.gif" />
+
+Think of a video game. You have a scene with many sound effects and various music tracks.
+You try to load the scene, and it grinds to a halt because all the audio data is loaded before use.
+Uh, it's not fun. Who has time for this?
+
+## What is streaming?
+
+So, what is audio streaming? Audio streaming is the ability to load audio data in chunks.
+For example, you could have 1 second worth of audio data loaded. As the audio plays,
+it detects when it reaches the end of that chunk of data. At that point, it loads the next chunk
+of 1-second data, cleans up the previous chunk, and continues playing.
+
+The benefit of this is that the playback of the audio only loads what is needed when it is required.
+Without needing to load 3.5 MB of data, it may only load 1 kb. Stream buffering means
+almost instant loading of any audio content.
+
+But this also has some downsides. Nothing comes for free, you know. The downside to streaming 
+is the performance of the playback operations. For example, let's say
+I have an audio file that is 5 minutes long. When I tell the audio to jump from position 30 seconds
+to 240 seconds, it has to perform some operations to figure out where in the data it needs to jump to,
+as well as other technical things such as decoder operations and more.
+
+Due to this, it is a bit slower to pause, play, or jump around in the audio data than it would be
+if it were all loaded and ready to go.
+
+## When should you use full vs stream buffering?
+
+The usual rule of thumb is to use full buffering if the audio is very short and needs to play quickly.
+In video games, these are usually sound effects. The player usually wants or needs to fire the weapon
+in quick succession. Each weapon fire requires the sound effect to play immediately. It is ideal
+to reduce playback lag as much as possible and use full buffering.
+
+If you have an extended audio track, such as background music, it is ideal to use streaming.
+This way, when a scene is loaded, you don't have to wait for 99% of the audio to load before it starts playing.
+Also, playback operation performance is not required when performing playback operations on background music.
+
+The above examples give you an idea of the use cases for each type. As with all
+software, it depends on what you are doing.
+
+:::tip  Remember
+CASL is not just for games. You can use it to create any audio application!!
+:::
+<GIF url="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW5mZjJmODU3OGwyZGpnOG9iMzRxbjFvNWk0anQ2YW1tZmgwY3ZkbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hXDrTueJWAscK3xWQ2/giphy.gif" isCentered="true"/>
+
+## Quick example
+
+Playing sound with CASL is a breeze. All you need is a `.mp3` or `.ogg` file, and you're ready.
+We've designed CASL to be user-friendly and intuitive so you can focus on creating great audio
+applications without any hassle.
+
+Full buffering:
+```csharp
+// Fully loaded audio data
+var filePath = "C:/path/to/audio.mp3";
+
+var audio = new Audio(filePath, BufferType.Full);
+audio.Play();
+```
+Stream buffering:
+```csharp
+// Stream audio data
+var filePath = "C:/path/to/audio.mp3";
+
+var audio = new Audio(filePath, BufferType.Stream);
+audio.Play();
+```
+
+That is it!! Super easy, right? Just choose what type of buffering you want, and everything
+else is handled for you.
+
+All of the other features are easy to use as well. To play around with a sample application
+that shows off all of the features, and you can use the <URL link="github.com/KinsonDigital/CASL/tree/preview/Testing/CASLTesting" text="CASLTesting"/> project.
+
+This project is just a CLI application used for manually testing _**CASL**_. But it is great
+for trying out the different features from a non-code perspective.
+
+That's it for this release!! Enjoy!!
+
+## <span class="color-section">Join Our Community</span>
+
+<JoinComm />
