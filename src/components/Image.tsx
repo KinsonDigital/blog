@@ -8,7 +8,7 @@ interface Params {
     isCentered?: string;
 }
 
-const GIF: React.FC<Params> = ({ url, isCentered }: Params) => {
+const Image: React.FC<Params> = ({ url, isCentered }: Params) => {
     const classValue = isCentered === undefined || isCentered === "true"
         ? "center-horiz"
         : "";
@@ -22,4 +22,4 @@ const GIF: React.FC<Params> = ({ url, isCentered }: Params) => {
     );
 };
 
-export default GIF;
+export default Image;
