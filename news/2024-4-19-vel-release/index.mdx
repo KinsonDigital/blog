@@ -105,7 +105,6 @@ public override void LoadContent()
 {
     this.textureLoader = new TextureLoader(); 👈🏼 // Has been removed
     this.texture = this.textureLoader.Load("my-texture");
-  this.texture = this.textureLoader.Load("my-texture");
 }
 ```
 
@@ -160,12 +159,10 @@ in _**Velaptor**_. The `TimeSpan` API data type provides more power and flexibil
 4. We removed the `Reset()` method which was a duplication of the `Stop()` method. 
 Both methods existed when we first brought **CASL** into __**Velaptor**__. In the world of <URL link="https://openal.org/" text="OpenAL"/>,
 there is a difference between both operation types, and they were brought into the API
-there is a difference between the different operation types, and they were brought into the API
 by mistake. When it comes to user expectations and experience, a single method is the better way to go.
 
 5. We removed the `public` constructor from the `Audio` class (it used to be `Sound`),
 which reduces the number of ways to load content and keeps the API opinionated and consistent.
-opinionated and consistent.
 
 ### Naming Changes
 
