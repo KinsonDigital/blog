@@ -10,6 +10,18 @@ body:
   validations:
     required: true
 
+- type: textarea
+  attributes:
+    label: Acceptance Criteria
+    value: |
+      ```[tasklist]
+      ### Acceptance Criteria
+      ```
+    description: The items to complete in order to satisfy the Definition of Done.
+  validations:
+    required: true
+    render: markdown
+
 - type: checkboxes
   attributes:
     label: ToDo Items

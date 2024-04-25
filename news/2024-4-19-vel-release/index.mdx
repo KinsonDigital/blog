@@ -15,9 +15,9 @@ Hello again!! This release is a good one. 😉
 
 ## Quick Overview
 
-This release contains various changes like a bug fix related to flipping images vertically and
+This release contains changes like a bug fix related to flipping images vertically and
 horizontally, dependency updates, refactorings, code cleanup, and most importantly, the new stream audio
-playback feature inherited from <GHProj owner="KInsonDigital" projName="CASL"/>.
+playback feature inherited from <GHProj owner="KinsonDigital" projName="CASL"/>.
 
 The Velaptor release _**v1.0.0-preview.35**_ also contains breaking changes related to the public API.
 These breaking changes are necessary and help solidify the public API before the version `v1.0.0` final release.
@@ -30,7 +30,7 @@ Check out the <ReleaseNotes projName="Velaptor" version="v1.0.0-preview.25"/>!!
 If you are interested in seeing some of the features of _**Velaptor**_, check out the 
 <URL link="https://www.youtube.com/watch?v=LxeVcUZw_WQ" text="Demo Video"/>!!
 
-Quick shout out to the following contributors for their contributions to this release:
+Quick shout out to the following contributors for their support:
 - Thanks <URL link="https://github.com/AndreBonda" text="@AndreBonda"/> for his contribution with <URL link="https://github.com/KinsonDigital/Velaptor/issues/868" text="issue #868"/>!
 - Thanks <URL link="https://github.com/thestbar" text="@thestbar"/> for his contribution with <URL link="https://github.com/KinsonDigital/Velaptor/issues/783" text="issue #783"/>!
 :::
@@ -41,9 +41,9 @@ Let's get into the details!!
 ## Bug Fix
 
 The bug fix in this release is related to flipping images vertically and horizontally when using
-the `ImageData` struct. If you were using a variable of type `ImageData` in the past where the creation
-of the variable when using the default constructor or the `default` keyword, and you tried to flip
-the image using the `FlipHorizontally()` or `FlipVertically()` methods, then you would get an exception.
+the `ImageData` struct. If you were using a variable of type `ImageData`, then created the variable 
+using the default constructor or the `default` keyword, and you tried to flip the image using the
+`FlipHorizontally()` or `FlipVertically()` methods, then you would get an exception.
 
 Here is an example of the code that would throw an exception:
 
@@ -58,11 +58,11 @@ imgData.FlipVertically(); 👈🏻 Would cause an exception
 
 ## Dependency Updates
 
-The main dependency update was an update to the latest version of <GHProj owner="KInsonDigital" projName="CASL"/>.
-We will get into this later.
+The main dependency update was to the latest version of <GHProj owner="KinsonDigital" projName="CASL"/>.
+We will get into that later.
 
 :::info CASL Release Notes
-If you want the details, check out the <ReleaseNotes projName="CASL" version="v1.0.0-preview.18"/>.
+Check out the <ReleaseNotes projName="CASL" version="v1.0.0-preview.18"/> for more details.
 :::
 
 Another dependency update was upgrading <GHProj owner="KinsonDigital" projName="Carbonate"/> from version _**v1.0.0-preview.16**_ to _**v1.0.0-preview.18**_.
@@ -73,19 +73,19 @@ Another dependency update was upgrading <GHProj owner="KinsonDigital" projName="
 As always, we are continuously looking for ways to improve the codebase. This release contains code cleanup in areas such
 as the main Velaptor project, the unit tests, spelling and grammar throughout the code docs, and more.
 
-The improvement of the code docs directly impacts the developer experience as well as on the <URL link="https://docs.velaptor.io/docs" text="API documentation"/>.
+The improvement of the code docs directly impacts the developer experience as well as on the <URL link="https://docs.velaptor.io/docs/api/Namespaces" text="API documentation"/>.
 
 
 ## API Changes
 
 The breaking changes in this release are related to the public API. The changes are necessary to make the API more consistent,
-easy to use, and as less confusing as possible.
+easy to use, and with minimal confusion.
 
 ### Removal of concrete loader types
 
 This change is about being more opinionated and producing less confusion for the user when loading content.
-Currently, the best and easiest way to load content is to use the `ContentLoaderFactory` to create
-the content loaders. Use the desired loader throughout the lifetime of the scene and then use that loader to load that specific kind of content.
+Currently, the best and easiest way to load content and create content loaders is to use the `ContentLoaderFactory`.
+Use the desired loader throughout the lifetime of the scene, then use that loader to load specific content.
 
 Let's show you an example:
 
@@ -98,24 +98,23 @@ public override void LoadContent()
 }
 ```
 
-Another way that you "could" load content is by manually creating a loader object.
+Before version _**v1.0.0-preview.35**_  you could load content manually by creating a loader object:
 
 ```csharp
 public override void LoadContent()
 {
-  // Used to be able to do this, but not anymore
-  this.textureLoader = new TextureLoader();
-  this.texture = this.textureLoader.Load("my-texture");
+    this.textureLoader = new TextureLoader(); 👈🏼 // Has been removed
+    this.texture = this.textureLoader.Load("my-texture");
 }
 ```
 
-We are getting close but have yet to reach _**v1.0.0**_. The _**NEED**_ for creating content loaders via constructors is not necessary, and it is better to have APIs closed and then opened up as needed for a good reason. This practice helps keep the API
-more consistent, and reduce breaking changes.
+We are getting close but have yet to reach _**v1.0.0**_. The _**NEED**_ for creating content loaders via constructors is not necessary;
+it is better to have APIs closed and then opened up as needed. This practice helps keep the API more consistent, and reduces breaking changes.
 
 ### Sound class changes
 
-1. We have changed the name of the `Sound` class to `Audio` and the `ISound` interface to `IAudio`. This change better reflects the purpose of the class as
-well as better alignment with the latest version of the CASL library.
+1. We have changed the name of the `Sound` class to `Audio` and the `ISound` interface to `IAudio`. This change better reflects the purpose of the class and 
+aligns better with the latest version of the CASL library.
 
     ```csharp
     // Before v1.0.0-preview.35
@@ -157,15 +156,13 @@ in _**Velaptor**_. The `TimeSpan` API data type provides more power and flexibil
     var isStopped = music.IsStopped;
     ```
 
-4. We removed the `Reset()` method. The functionality provided by this method is the same as
-the `Stop()` method and was unnecessary. Both methods existed when we first brought **CASL**_
-into __**Velaptor**__. In the world of <URL link="https://openal.org/" text="OpenAL"/>,
-there is a difference between the different operation types, and they were brought into the API
+4. We removed the `Reset()` method which was a duplication of the `Stop()` method. 
+Both methods existed when we first brought **CASL** into __**Velaptor**__. In the world of <URL link="https://openal.org/" text="OpenAL"/>,
+there is a difference between both operation types, and they were brought into the API
 by mistake. When it comes to user expectations and experience, a single method is the better way to go.
 
-5. We removed the `public` constructor from the `Audio` class. (it used to be `Sound`).
-Removal reduces the number of different ways to load content further and keeps the API
-opinionated and consistent.
+5. We removed the `public` constructor from the `Audio` class (it used to be `Sound`),
+which reduces the number of ways to load content and keeps the API opinionated and consistent.
 
 ### Naming Changes
 
