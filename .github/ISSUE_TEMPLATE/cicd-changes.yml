@@ -21,9 +21,10 @@ body:
   attributes:
     label: Acceptance Criteria
     placeholder: |
+      ```[tasklist]
+      ### Acceptance Criteria
       Example:
-        - [ ] Item 1 complete
-        - [ ] Item 2 complete
+      ```
     description: The items to complete in order to satisfy the Definition of Done.
   validations:
     required: true
