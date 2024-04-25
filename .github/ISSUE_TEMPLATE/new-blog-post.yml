@@ -13,7 +13,7 @@ body:
 - type: textarea
   attributes:
     label: Acceptance Criteria
-    placeholder: |
+    value: |
       ```[tasklist]
       ### Acceptance Criteria
       ```
