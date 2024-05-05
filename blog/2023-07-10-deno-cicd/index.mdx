@@ -15,7 +15,7 @@ import JoinComm from "@site/src/components/JoinComm";
 
 </div>
 
-## <span class="color-section">Intro</span>
+## <span className="color-section">Intro</span>
 
 A lot of us just want to work on our core project and not have to worry about things like
 documentation, workflows, status checks, and a readme file, right?  I can empathize with that!! 
@@ -35,7 +35,7 @@ However, one thing that I've used to help with CICD recently is **Deno** and I t
 a game changer! 
 
 
-## <span class="color-section">What is Deno?</span>
+## <span className="color-section">What is Deno?</span>
 
 If you know what **NodeJS**  is, then the concept is the same.  **Deno** is a secure runtime for 
 **JavaScript** and **TypeScript** built with <URL link="www.rust-lang.org/" text="Rust"/> and is the predecessor to **NodeJS**.  It's built by the 
@@ -48,7 +48,7 @@ Check out **Deno** at <URL link="deno.land"/>.
 :::
 
 
-## <span class="color-section">Some Deno benefits</span>
+## <span className="color-section">Some Deno benefits</span>
 
 One thing that makes **Deno** awesome is the ability to execute scripts directly from the 
 web using a URL.  That's right! You can execute a script directly from the web without 
@@ -74,7 +74,7 @@ Using these scripts hasn't only made my pipelines reusable and reliable but has 
 made them quick and easy to develop and maintain.
 
 
-## <span class="color-section">So how do you do use Deno for CICD?</span>
+## <span className="color-section">So how do you do use Deno for CICD?</span>
 
 There are different ways to go about it depending on your needs.  You can host the **Deno** 
 scripts alongside your project or in a central location like another repository.  I have done both with no problems
@@ -92,12 +92,12 @@ If you want to check out some of my scripts or **GitHub** workflows that are use
 Now that I've sold you on **Deno** 😉, let's create a status check workflow that executes a **Deno** 
 script and validates that your pull request head branch is valid.
 
-## <span class="color-section">Project setup</span>
+## <span className="color-section">Project setup</span>
 
-### <span class="color-sub-section">1. Create or choose repo</span>
+### <span className="color-sub-section">1. Create or choose repo</span>
 Create a new or choose an already existing **GitHub** repository.
 
-### <span class="color-sub-section">2. Create new folder & script file</span>
+### <span className="color-sub-section">2. Create new folder & script file</span>
 In the root of your repository (or location of your choice), create a folder called _**cicd**_, then
 inside that folder, create a file called _**validate-feature-branch.ts**_.
 
@@ -105,7 +105,7 @@ inside that folder, create a file called _**validate-feature-branch.ts**_.
 It does not matter where you put your scripts.  That is up to you and your needs.
 :::
 
-## <span class="color-section">Add arg validation</span>
+## <span className="color-section">Add arg validation</span>
 Add the following code to check that a single argument is being passed into the script from the workflow.
 
 ``` ts
@@ -124,7 +124,7 @@ If zero or more than one argument has been passed in, the script will exit with 
 Using the `Deno.exit()` function with any number argument greater than zero will fail the **GitHub** workflow.
 
 
-## <span class="color-section">Branch name and regex</span>
+## <span className="color-section">Branch name and regex</span>
 We can use some handy regex to validate whether or not the name of the branch meets our branch
 naming requirements. Add the following lines of code to get the argument value and some regex to use for validation.  
 
@@ -141,7 +141,7 @@ const branchName = Deno.args[0].trim();
 ```
 
 
-## <span class="color-section">Checking the branch name</span>
+## <span className="color-section">Checking the branch name</span>
 
 Now that we have our branch name and some regex to use for validation, add the following _`if..else`_  block. 
 The workflow will pass or fail based on whether or not the branch name meets the validation requirements dictated by
@@ -166,7 +166,7 @@ Click <URL link="docs.github.com/en/actions/using-workflows/workflow-commands-fo
 :::
 
 
-## <span class="color-section">Creating a workflow</span>
+## <span className="color-section">Creating a workflow</span>
 
 :::note GitHub workflows
 If you are unfamiliar with **GitHub** workflows, check out the <URL link="docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions" text="GitHub Workflow Docs"/>.
@@ -174,16 +174,16 @@ If you are unfamiliar with **GitHub** workflows, check out the <URL link="docs.g
 
 Now that we have our script, we can create a workflow that will execute the script.  Follow the steps below:
 
-### <span class="color-sub-section">1. Create workflow folders</span>
+### <span className="color-sub-section">1. Create workflow folders</span>
 
 If these folders don't already exist, create a folder with the name _**.github**_ in the root of the repository 
 and then create a folder named _**workflows**_ inside the _**.github**_ folder.
 
-### <span class="color-sub-section">2. Create workflow file</span>
+### <span className="color-sub-section">2. Create workflow file</span>
 
 In the _**.github/workflows**_ folder, create a file with the name _**branch-status-check.yml**_.
 
-### <span class="color-sub-section">3. Basic workflow structure</span>
+### <span className="color-sub-section">3. Basic workflow structure</span>
 
 We'll give our workflow some basic structure like the workflow name, a pull request trigger, and a job with a step.
 The first step will be the checkout action which is required to get access to the script file
@@ -211,7 +211,7 @@ I use '✅' for status checks and '🚀' for releases.  You can of course can do
 :::
 
 
-### <span class="color-sub-section">4. Setup Deno</span>
+### <span className="color-sub-section">4. Setup Deno</span>
 
 The **Deno** team has an action in the marketplace for making it easy to install **Deno** in the **GitHub** runner which is required
 before you execute any **Deno** commands.  The good thing about **Deno** is that it's super small, cross-platform, and
@@ -226,7 +226,7 @@ Add the following step to the workflow below the checkout step to set up Deno.
     deno-version: v1.x.x
 ```
 
-### <span class="color-sub-section">5. Add script execution step</span>
+### <span className="color-sub-section">5. Add script execution step</span>
 
 Now that we have **Deno** set up, we can execute our script.  Add the following step to the workflow below the **Deno** setup step.
 
@@ -263,14 +263,14 @@ Go to the <URL link="docs.deno.com/runtime/manual/basics/permissions" text="Deno
 
 That's it!!  Very simple and the only limit is your imagination!!
 
-## <span class="color-section">Summary</span>
+## <span className="color-section">Summary</span>
 
 Deno is a great option for creating utility scripts for whatever your needs are.  It can be
 local scripts on your machine to help automate your development workflow, scripts to
 do simple tasks in a project such as cleanup, or this case, for **GitHub** workflows to help automate
 your CICD process.  I have personally been using this all over my organization and it's been a wonderful experience!!
 
-## <span class="color-section">Resources</span>
+## <span className="color-section">Resources</span>
 
 - <URL link="https://deno.land/" text="Deno"/>
 
@@ -282,7 +282,7 @@ your CICD process.  I have personally been using this all over my organization a
 - <URL link="regex101.com/" text="Regex101"/>
 - <URL link="www.rust-lang.org/" text="Rust"/>
 
-<details closed>
+<details closed="true">
     <summary>Full TypeScript Source</summary>
 
 ```ts
@@ -306,7 +306,7 @@ if (branchNameRegEx.test(branchName)) {
 ```
 </details>
 
-<details closed>
+<details closed="true">
     <summary>Full Workflow Source</summary>
 
 ```yml
@@ -337,6 +337,6 @@ jobs:
 If you have any questions, want to chat, or contribute to any of my open-source projects, feel free to reach out
 to me on our discord channel or X located at the top right.
 
-## <span class="color-section">Join Our Community</span>
+## <span className="color-section">Join Our Community</span>
 
 <JoinComm />

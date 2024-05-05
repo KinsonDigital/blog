@@ -11,8 +11,9 @@ import GHUrl from "@site/src/components/GHUrl";
 import ReleaseNotes from "@site/src/components/ReleaseNotes";
 import GHProj from "@site/src/components/GHProj";
 import PR from "@site/src/components/PR";
+import Details from "@site/src/components/Details";
 
-## <span class="color-section">New Velaptor Release</span>
+## <span className="color-section">New Velaptor Release</span>
 
 Welcome to the new exciting and latest update on our 2D game development framework <GHProj owner='KinsonDigital' projName='Velaptor'/>!
 We're thrilled to announce that our newest release is now live which consists of some bug fixes, technical debt cleanup, updates
@@ -32,8 +33,7 @@ We appreciate your help and support in making Velaptor better!
 
 {/*truncate*/}
 
-
-## <span class="color-section">Introduction</span>
+## <span className="color-section">Introduction</span>
 
 Imagine you're playing a game. The graphics are stunning, the storyline is captivating, and the gameplay is immersive.
 But every few seconds, the game stutters. The frame rate drops, the controls become unresponsive, and the whole experience is ruined.
@@ -53,7 +53,7 @@ the best tools possible to create the best games possible.
 
 So let's dive into the performance improvements in this release of Velaptor!
 
-## <span class="color-section">Performance improvements</span>
+## <span className="color-section">Performance improvements</span>
 
 The performance improvements for this release are for the most part related to the keyboard input system.
 When a game is built, you never know when the user will press a key or move the mouse. Because of this, you have to poll
@@ -83,7 +83,7 @@ the performance of YOUR game can be problematic.
 C# is a great choice for game development and has a lot of successful 2D and 3D game titles that have been developed with it.
 
 
-## <span class="color-section">Performance tools used</span>
+## <span className="color-section">Performance tools used</span>
 
 When it comes to collecting and measuring the performance of C# code, the best tool in my opinion that exists for this is
 <URL link='https://github.com/dotnet/BenchmarkDotNet' text='BenchmarkDotNet'/>. This tool is used by the .NET team to
@@ -91,7 +91,7 @@ measure the performance of the .NET runtime and the .NET libraries. It is also u
 to measure the performance of their code.
 
 
-## <span class="color-section">Improvement results</span>
+## <span className="color-section">Improvement results</span>
 
 The performance gains that were achieved were impressive. Though these gains might not be noticeable for some games, indeed
 they would be for others. Remember, not all games are created equal and some games require more performance than others. As
@@ -105,11 +105,8 @@ The types that were improved were `KeyboardState`, and `Keyboard`. When measurin
 get a good baseline before making any changes. So we created a <URL link="https://github.com/KinsonDigital/Velaptor/tree/preview/Performance/KeyboardPerf" text="performance project"/>
 to accomplish this.
 
-<details closed>
-<summary>
-Baseline Performance Results
-</summary>
-
+:::info Baseline Performance Results
+<Details summary="Open To View">
 These are the baseline results for the `Keyboard` and `KeyboardState` types.
 
 | Method                                  | Mean     | Memory Allocations |
@@ -131,7 +128,8 @@ These are the baseline results for the `Keyboard` and `KeyboardState` types.
 | KeyboardState.IsRightCtrlKeyDown        | 1.966 us |             8.2 KB |
 | KeyboardState.IsRightShiftKeyDown       | 1.933 us |             8.2 KB |
 | Keyboard.GetState                       | 3.230 us |             8.2 KB |
-</details>
+</Details>
+:::
 
 Now, let's put these numbers into perspective. Imagine each frame as a "bandwidth" that you're working with.
 This analogy can help us understand how different parts of your game might impact the overall performance. 
@@ -147,11 +145,8 @@ nanoseconds to work with per frame. Now that's a number we can work with!
 
 This is why every microsecond counts.
 
-<details closed>
-<summary>
-Performance Results After Improvements
-</summary>
-
+:::info Performance Results After Improvements
+<Details summary="Open To View">
 Here are the results after all of the improvements were made.
 
 | Method                                  | Mean       | Allocated |
@@ -173,7 +168,8 @@ Here are the results after all of the improvements were made.
 | KeyboardState.IsRightCtrlKeyDown        |   2.210 ns |         - |
 | KeyboardState.IsRightShiftKeyDown       |   2.188 ns |         - |
 | Keyboard.GetState                       | 591.791 ns |    2752 B |
-</details>
+</Details>
+:::
 
 The results are impressive. Notice that the timescale has changed from 'us' to 'ns'.
 The acronym 'ns' stands for nanoseconds which are 1 billionth of a second. This is a very small amount of time.
@@ -182,11 +178,8 @@ This is huge!! Also, notice the huge amount of reduction in memory allocations.
 To help put this improvement into perspective, refer to the comparison table below with the time scale of the baseline
 converted into nanoseconds.
 
-<details closed>
-<summary>
-Performance Comparison (Time)
-</summary>
-
+:::info Performance Comparison (Time)
+<Details summary="Open To View">
 Processing time comparison before and after the improvements.
 
 | Method                                  | Time Before | Time After | Perf Improvement |
@@ -208,14 +201,12 @@ Processing time comparison before and after the improvements.
 | KeyboardState.IsRightCtrlKeyDown        |     1966 ns |   2.210 ns |           99.89% |
 | KeyboardState.IsRightShiftKeyDown       |     1933 ns |   2.188 ns |           99.89% |
 | Keyboard.GetState                       |     3230 ns | 591.791 ns |           81.68% |
-</details>
+</Details>
+:::
 
 This results in an average improvement of 98.25% across the board for keyboard input.
 
-<details closed>
-<summary>
-Memory Allocation Comparison
-</summary>
+<Details summary="Memory Allocation Comparison">
 
 Memory allocation comparison before and after the improvements.
 
@@ -238,16 +229,13 @@ Memory allocation comparison before and after the improvements.
 | KeyboardState.IsRightCtrlKeyDown        |  8.2 KB |     0 B |
 | KeyboardState.IsRightShiftKeyDown       |  8.2 KB |     0 B |
 | Keyboard.GetState                       |  8.2 KB |  2752 B |
-</details>
+</Details>
 
 For the methods that still cause allocations, the average improvement is an 82.60% decrease in memory allocations.
 This would arguably be a bigger win vs the processing time improvements.
 
-<details closed>
-<summary>
-Performance Comparison Charts
-</summary>
-
+:::info Performance Comparison Charts
+<Details summary="Open To View">
 These charts show the values in number form above each bar.  The performance
 improvement is so great that the majority of the green bars do not visibly
 register on the char.
@@ -255,11 +243,11 @@ register on the char.
 ![perf-chart-1](./images/keyboardstate-perf-improvements-1.svg)
 ![perf-chart-2](./images/keyboardstate-perf-improvements-2.svg)
 ![perf-chart-3](./images/keyboardstate-perf-improvements-3.svg)
+</Details>
+:::
 
-</details>
 
-
-## <span class="color-section">How did we do it?</span>
+## <span className="color-section">How did we do it?</span>
 
 You might be wondering, how did we achieve such significant performance gains? Let's dive into the details.
 We began with the `KeyboardState` struct and `Keyboard` class. We noticed some
@@ -287,6 +275,6 @@ to see exactly how we improved the performance of the keyboard input system.
 :::
 
 
-## <span class="color-section">Join Our Community</span>
+## <span className="color-section">Join Our Community</span>
 
-<JoinComm />@site/src/components/GHProj@site/src/components/GHUrl
+<JoinComm />
