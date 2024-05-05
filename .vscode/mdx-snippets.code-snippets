@@ -52,7 +52,7 @@
 		"scope": "mdx",
 		"prefix": "section",
 		"body": [
-			"## <span class=\"color-section\">${1: description}</span>\n\n$3"
+			"## <span className=\"color-section\">${1: description}</span>\n\n$3"
 		],
 		"description": "Section"
 	},
@@ -68,7 +68,7 @@
 		"scope": "mdx",
 		"prefix": "sub-section",
 		"body": [
-			"### <span class=\"color-sub-section\">${1: description}</span>\n\n$3"
+			"### <span className=\"color-sub-section\">${1: description}</span>\n\n$3"
 		],
 		"description": "Sub Section"
 	},
