@@ -25,7 +25,7 @@ A quick thanks to the following contributors for their contributions to this rel
 {/*truncate*/}
 
 
-## <span class="color-section">Quick Overview</span>
+## <span className="color-section">Quick Overview</span>
 
 This release of **Velaptor** brings you the following:
 
@@ -37,7 +37,7 @@ This release of **Velaptor** brings you the following:
 6. Internal dependency updates.
 
 
-## <span class="color-section">Perf Improvements</span>
+## <span className="color-section">Perf Improvements</span>
 
 <Image url="https://media.giphy.com/media/fBEMsUeGHdpsClFsxM/giphy.gif"/>
 
@@ -53,17 +53,17 @@ Please note that even the smallest performance improvements can accumulate over 
 a significantly smoother and faster gaming experience. Stay tuned as we will as we continue to
 enhance _**Velaptor’s**_ performance!
 
-## <span class="color-section">Mocking Library Migration</span>
+## <span className="color-section">Mocking Library Migration</span>
 
 This is not going to affect any users of **Velaptor**, but this will affect contributors and maintainers.
 
-### <span class="color-sub-section">Migration Details</span>
+### <span className="color-sub-section">Migration Details</span>
 
 This is related to refactoring all of our unit test code from using the <GHProj owner="devlooped" projName="moq"/>
 library to the [NSubstitute](https://nsubstitute.github.io/) library. This is going to take a while but all of
 the issues related to this are created and ready to go. We will be working on releasing at least one of these issues or more per release.
 
-### <span class="color-sub-section">Rationale Behind the Migration</span>
+### <span className="color-sub-section">Rationale Behind the Migration</span>
 
 
 The decision to migrate from _**Moq**_ to _**NSubstitute**_ is influenced by several factors.
@@ -88,7 +88,7 @@ However, it’s important to note that the decision to switch was not solely bas
 There are multiple reasons, all aimed at improving the quality and maintainability of _**Velaptor**_. 
 
 
-## <span class="color-section">Deprecated UI Usage Removal</span>
+## <span className="color-section">Deprecated UI Usage Removal</span>
 
 We deprecated the _**Velaptor UI Control API**_ in the last release which was version _**v1.0.0-preview.31**_.
 
@@ -110,7 +110,7 @@ With the replacement of the UI API with ImGui.NET in the _**VelaptorTesting**_ p
 remove the deprecated control UI API from the _**Velaptor**_ codebase when the time is right.
 
 
-### <span class="color-sub-section">Reasons for deprecation</span>
+### <span className="color-sub-section">Reasons for deprecation</span>
 
 The decision to deprecate the _**Velaptor**_ UI Control API was a significant one that I’ve been contemplating for some time.
 This API, which enables the creation of UI controls like buttons and text boxes, proved to be quite labor-intensive during its development.
@@ -126,7 +126,7 @@ Given these considerations, I decided it would be best to deprecate the UI Contr
 This decision allows us to focus on enhancing the core functionalities of Velaptor.
 However, this doesn’t rule out the possibility of revisiting this direction in the future.
 
-### <span class="color-sub-section">Timeline for full removal?</span>
+### <span className="color-sub-section">Timeline for full removal?</span>
 
 While the Velaptor UI Control API is currently deprecated, it remains functional. As you continue to use the API,
 you’ll notice deprecation warnings in your preferred IDE or text editor.
@@ -143,7 +143,7 @@ We recommend updating your code as soon as possible.
 :::
 
 
-## <span class="color-section">Bug Squashing!!</span>
+## <span className="color-section">Bug Squashing!!</span>
 
 Let’s be honest, there’s a certain satisfaction in squashing bugs, especially during development.
 It’s like getting a bonus when you discover a bug while working on something else.
@@ -160,7 +160,7 @@ of the game object using the `Window.Dispose()` method. One might wonder, why wo
 the bug is now fixed. If you attempt to do this, you will receive a proper `ObjectDisposedException` message.
 
 
-## <span class="color-section">Dependency Updates</span>
+## <span className="color-section">Dependency Updates</span>
 
 We keep our dependencies up to date as much as possible. This release is no different.
 
@@ -169,7 +169,7 @@ We keep our dependencies up to date as much as possible. This release is no diff
 2. SixLabors.ImageSharp updated from _**v3.1.1**_ to _**v3.1.2**_.
     - This is used for loading image data from disk before being uploaded to the GPU.
 
-## <span class="color-section">Wrap Up!!</span>
+## <span className="color-section">Wrap Up!!</span>
 
 Well, that is it for the release!! If you want to know more details of the changes of any release,
 it is all public and open source!!
@@ -182,6 +182,6 @@ Until the next release!!
 
 <Image url="https://media.giphy.com/media/rHR8qP1mC5V3G/giphy.gif"/>
 
-## <span class="color-section">Join Our Community</span>
+## <span className="color-section">Join Our Community</span>
 
 <JoinComm />
