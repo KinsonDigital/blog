@@ -1,5 +1,8 @@
 {
-	"deno.enablePaths": ["clean.ts"],
+	"deno.enablePaths": [
+		"clean.ts",
+		"playground.ts"
+	],
 	"cSpell.words": [
 		"algoliasearch",
 		"bufferutil",
