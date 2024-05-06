@@ -1,6 +1,7 @@
 import { themes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import tailwindPlugin from './plugins/tailwind-config.cjs';
 
 const config: Config = {
 	title: "Kinson Digital",
@@ -48,31 +49,6 @@ const config: Config = {
 			} satisfies Preset.Options,
 		],
 	],
-
-	// ...
-	plugins: [
-		[
-			"@docusaurus/plugin-content-blog",
-			{
-				/**
-				 * Required for any multi-instance plugin
-				 */
-				id: "news",
-
-				/**
-				 * URL route for the blog section of your site.
-				 * *DO NOT* include a trailing slash.
-				 */
-				routeBasePath: "news",
-
-				/**
-				 * Path to data on filesystem relative to site dir.
-				 */
-				path: "./news",
-			},
-		],
-	],
-
 	themeConfig:
 		{
 			// Replace with your project's social card
@@ -209,6 +185,29 @@ const config: Config = {
 				darkTheme: themes.dracula,
 			},
 		} satisfies Preset.ThemeConfig,
+	plugins: [
+		[
+			"@docusaurus/plugin-content-blog",
+			{
+				/**
+				 * Required for any multi-instance plugin
+				 */
+				id: "news",
+
+				/**
+				 * URL route for the blog section of your site.
+				 * *DO NOT* include a trailing slash.
+				 */
+				routeBasePath: "news",
+
+				/**
+				 * Path to data on filesystem relative to site dir.
+				 */
+				path: "./news",
+			},
+		],
+		tailwindPlugin,
+	],
 };
 
 module.exports = config;
