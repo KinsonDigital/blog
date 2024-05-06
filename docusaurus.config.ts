@@ -1,6 +1,7 @@
-import { themes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
+import tailwindPlugin from "./plugins/tailwind-config.cjs";
 
 const config: Config = {
 	title: "Kinson Digital",
@@ -24,7 +25,7 @@ const config: Config = {
 	markdown: {
 		mermaid: true,
 	},
-	themes: ['@docusaurus/theme-mermaid'],
+	themes: ["@docusaurus/theme-mermaid"],
 	// Even if you don't use internalization, you can use this field to set useful
 	// metadata like html lang. For example, if your site is Chinese, you may want
 	// to replace "en" with "zh-Hans".
@@ -48,67 +49,42 @@ const config: Config = {
 			} satisfies Preset.Options,
 		],
 	],
-
-	// ...
-	plugins: [
-		[
-			"@docusaurus/plugin-content-blog",
-			{
-				/**
-				 * Required for any multi-instance plugin
-				 */
-				id: "news",
-
-				/**
-				 * URL route for the blog section of your site.
-				 * *DO NOT* include a trailing slash.
-				 */
-				routeBasePath: "news",
-
-				/**
-				 * Path to data on filesystem relative to site dir.
-				 */
-				path: "./news",
-			},
-		],
-	],
-
 	themeConfig:
 		{
 			// Replace with your project's social card
-			image: 'img/meta-image.png',
+			image: "img/meta-image.png",
 			metadata: [
 				{
-				  name: 'twitter:card',
-				  content: 'summary'
+					name: "twitter:card",
+					content: "summary"
 				},
 				{
-				  name: 'twitter:title',
-				  content: 'KinsonDigital Blog'
+					name: "twitter:title",
+					content: "KinsonDigital Blog"
 				},
 				{
-				  name: 'twitter:description',
-				  content: 'Blogging about technology, software development, and game development.'
+					name: "twitter:description",
+					content: "Blogging about technology, software development, and game development."
 				},
 				{
-				  name: 'twitter:image',
-				  content: 'https://docs.velaptor.io/img/meta-image.png'
+					name: "twitter:image",
+					content: "https://docs.velaptor.io/img/meta-image.png"
 				},
 				{
-				  name: 'twitter:image:alt',
-				  content: 'KinsonDigital Blog'
+					name: "twitter:image:alt",
+					content: "KinsonDigital Blog"
 				},
 				{
-				  name: 'twitter:site',
-				  content: '@KDCoder'
+					name: "twitter:site",
+					content: "@KDCoder"
 				},
 				{
-				  name: 'twitter:creator',
-				  content: '@KDCoder'
+					name: "twitter:creator",
+					content: "@KDCoder"
 				},
 				{
-				  name: 'keywords',
-				  content: 'Software Development, Software, Game, Game Development, C#, .NET, Technology, Programming, Coding, Tech'
+					name: "keywords",
+					content: "Software Development, Software, Game, Game Development, C#, .NET, Technology, Programming, Coding, Tech"
 				}
 			],
 			colorMode: {
@@ -204,11 +180,34 @@ const config: Config = {
 				copyright: `Copyright © ${new Date().getFullYear()} KinsonDigital`,
 			},
 			prism: {
-				additionalLanguages: ["bash", "diff", "json", "csharp"], 
+				additionalLanguages: ["bash", "diff", "json", "csharp"],
 				theme: themes.github,
 				darkTheme: themes.dracula,
 			},
 		} satisfies Preset.ThemeConfig,
+	plugins: [
+		[
+			"@docusaurus/plugin-content-blog",
+			{
+				/**
+				 * Required for any multi-instance plugin
+				 */
+				id: "news",
+
+				/**
+				 * URL route for the blog section of your site.
+				 * *DO NOT* include a trailing slash.
+				 */
+				routeBasePath: "news",
+
+				/**
+				 * Path to data on filesystem relative to site dir.
+				 */
+				path: "./news",
+			},
+		],
+		tailwindPlugin,
+	],
 };
 
 module.exports = config;
