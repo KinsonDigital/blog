@@ -8,6 +8,12 @@ defaults:
 
 on:
   workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Dry Run - Check to run the workflow without creating a release.
+        required: false
+        default: false
+        type: boolean
 
 
 permissions:
@@ -71,5 +77,6 @@ jobs:
         path: '${{ github.workspace }}/build'
 
     - name: Deploy to GitHub Pages
+      if: ${{ inputs.dry-run == 'false'}}
       id: deployment
       uses: actions/deploy-pages@v4

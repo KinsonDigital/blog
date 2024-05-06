@@ -29,9 +29,6 @@ jobs:
         $targetBranch = "${{ github.base_ref }}";
         $srcBranch = "${{ github.head_ref }}";
 
-        $featureBranchRegex = "";
-        $dependatobt
-
         # Validate the source branch
         if ($srcBranch -notmatch "${{ vars.FEATURE_BRANCH_REGEX }}" -and $srcBranch -notmatch "${{ vars.RENOVATE_BRANCH_REGEX }}") {
           $errorMsg = "::error::The source branch name '$srcBranch' is invalid.";
