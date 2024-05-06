@@ -1,12 +1,8 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+import { themes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
-const {themes} = require('prism-react-renderer');
-const lightTheme = themes.github;
-const darkTheme = themes.dracula;
-
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+const config: Config = {
 	title: "Kinson Digital",
 	tagline: "Quality Software Development",
 	favicon: "img/favicon.ico",
@@ -40,8 +36,7 @@ const config = {
 	presets: [
 		[
 			"classic",
-			/** @type {import('@docusaurus/preset-classic').Options} */
-			({
+			{
 				docs: false,
 				blog: {
 					routeBasePath: "/",
@@ -50,7 +45,7 @@ const config = {
 				theme: {
 					customCss: require.resolve("./src/css/custom.css"),
 				},
-			}),
+			} satisfies Preset.Options,
 		],
 	],
 
@@ -79,8 +74,7 @@ const config = {
 	],
 
 	themeConfig:
-		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-		({
+		{
 			// Replace with your project's social card
 			image: 'img/meta-image.png',
 			metadata: [
@@ -211,10 +205,10 @@ const config = {
 			},
 			prism: {
 				additionalLanguages: ["bash", "diff", "json", "csharp"], 
-				theme: lightTheme,
-				darkTheme: darkTheme,
+				theme: themes.github,
+				darkTheme: themes.dracula,
 			},
-		}),
+		} satisfies Preset.ThemeConfig,
 };
 
 module.exports = config;
