@@ -1,11 +1,23 @@
 {
+	"deno.enablePaths": ["clean.ts"],
 	"cSpell.words": [
+		"algoliasearch",
+		"bufferutil",
+		"CASL",
 		"CICD",
 		"clsx",
+		"docsearch",
+		"esbuild",
+		"estree",
+		"gtag",
 		"Kinson",
+		"lightningcss",
+		"nodelib",
+		"postcss",
 		"preinstall",
 		"typecheck",
-		"Velaptor"
+		"Velaptor",
+		"webassemblyjs"
 	],
 	"files.exclude": {
 		"**/.git": true,
