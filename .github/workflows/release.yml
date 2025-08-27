@@ -77,6 +77,6 @@ jobs:
         path: '${{ github.workspace }}/build'
 
     - name: Deploy to GitHub Pages
-      if: ${{ inputs.dry-run == 'false'}}
+      if: ${{ inputs.dry-run == false }}
       id: deployment
       uses: actions/deploy-pages@v4
