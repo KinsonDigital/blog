@@ -7,7 +7,7 @@ tags: [releases, velaptor]
 
 import JoinComm from "@site/src/components/JoinComm";
 import ReleaseNotes from "@site/src/components/ReleaseNotes";
-import GHProj from "@site/src/components/GHProj";
+import GitHubProject from "@site/src/components/GitHubProject";
 import Image from "@site/src/components/Image";
 
 Hello and welcome to another _**Velaptor**_ release!!
@@ -59,7 +59,7 @@ This is not going to affect any users of **Velaptor**, but this will affect cont
 
 ### <span className="color-sub-section">Migration Details</span>
 
-This is related to refactoring all of our unit test code from using the <GHProj owner="devlooped" projName="moq"/>
+This is related to refactoring all of our unit test code from using the <GitHubProject owner="devlooped" projName="moq"/>
 library to the [NSubstitute](https://nsubstitute.github.io/) library. This is going to take a while but all of
 the issues related to this are created and ready to go. We will be working on releasing at least one of these issues or more per release.
 
@@ -104,7 +104,7 @@ Changes to this project do not affect
 _**Velaptor**_ in any way.
 :::
 
-To replace the UI in the _**VelaptorTesting**_ project, we decided to use the <GHProj owner="ImGuiNET" projName="ImGui.NET"/>
+To replace the UI in the _**VelaptorTesting**_ project, we decided to use the <GitHubProject owner="ImGuiNET" projName="ImGui.NET"/>
 library. This library is a popular and battle-tested solution that has been around for a long time, making it an obvious choice for our needs.
 With the replacement of the UI API with ImGui.NET in the _**VelaptorTesting**_ project, we are now in a position to fully
 remove the deprecated control UI API from the _**Velaptor**_ codebase when the time is right.

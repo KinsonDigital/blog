@@ -27,7 +27,13 @@ const URL: React.FC<Params> = ({ link, text }: Params) => {
         <a href={link} target="_blank" rel="noopener noreferrer" className="link">
             {text}
             <OpenNewTab
-                style={{ paddingTop: "10", paddingLeft: "0.25%", width: "2%" }}
+                style={{
+                    display: "inline-block",
+                    marginBottom: "4px",
+                    verticalAlign: "middle",
+                    paddingLeft: "0.25%",
+                    width: "2%"
+                }}
             />
         </a>
     );
