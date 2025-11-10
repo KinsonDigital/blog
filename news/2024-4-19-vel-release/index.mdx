@@ -49,7 +49,7 @@ using the default constructor or the `default` keyword, and you tried to flip th
 
 Here is an example of the code that would throw an exception:
 
-```csharp
+```csharp showLineNumbers
 // ImageData imgData = default; 👈🏻 or this
 // var imgData = new ImageData(); 👈🏻 or this
 var imgData = default(ImageData); 👈🏻 or this
@@ -91,7 +91,7 @@ Use the desired loader throughout the lifetime of the scene, then use that loade
 
 Let's show you an example:
 
-```csharp
+```csharp showLineNumbers
 public override void LoadContent()
 {
     // Most common way to load content
@@ -102,7 +102,7 @@ public override void LoadContent()
 
 Before version _**v1.0.0-preview.35**_  you could load content manually by creating a loader object:
 
-```csharp
+```csharp showLineNumbers
 public override void LoadContent()
 {
     this.textureLoader = new TextureLoader(); 👈🏼 // Has been removed
@@ -118,7 +118,7 @@ it is better to have APIs closed and then opened up as needed. This practice hel
 1. We have changed the name of the `Sound` class to `Audio` and the `ISound` interface to `IAudio`. This change better reflects the purpose of the class and 
 aligns better with the latest version of the CASL library.
 
-    ```csharp
+    ```csharp showLineNumbers
     // Before v1.0.0-preview.35
     var music = new Sound("my-music.ogg");
 
@@ -142,7 +142,7 @@ in _**Velaptor**_. The `TimeSpan` API data type provides more power and flexibil
     - The `State` property was removed due to the unintentional exposure of the _**CASL**_ API.
 
     Here is an example of how to check the state of the audio before and after the changes:
-    ```csharp
+    ```csharp showLineNumbers
     // Before v1.0.0-preview.35
     var music = new Sound("my-music.ogg");
     var isPlaying = music.State == AudioState.Playing;
