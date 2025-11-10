@@ -8,7 +8,10 @@ import JoinCommunity from "../join-comm.mdx";
  */
 const MarkdownComp: React.FC = () => {
     return (
-        <JoinCommunity />
+        <>
+            <h2 className="color-section">Join Our Community</h2>
+            <JoinCommunity />
+        </>
     );
 }
 
