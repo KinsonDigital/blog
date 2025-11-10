@@ -18,12 +18,18 @@ const config: Config = {
 	// If you aren't using GitHub pages, you don't need these.
 	organizationName: "KinsonDigital", // Usually your GitHub org/user name.
 	projectName: "blog", // Usually your repo name.
-
 	onBrokenLinks: "throw",
-	onBrokenMarkdownLinks: "warn",
+
 	// Used for creating diagrams
 	markdown: {
 		mermaid: true,
+		hooks: {
+			onBrokenMarkdownLinks: (link) => {
+				console.warn("Broken markdown link found:");
+				console.warn(`\n\tURL: ${link.url}`);
+				console.warn(`\n\tSrc File Path: ${link.sourceFilePath}`);
+			}
+		}
 	},
 	themes: ["@docusaurus/theme-mermaid"],
 	// Even if you don't use internalization, you can use this field to set useful
