@@ -13,22 +13,22 @@ body:
 - type: textarea
   attributes:
     label: Acceptance Criteria
-    value: |
-      ```[tasklist]
-      ### Acceptance Criteria
-      ```
     description: The items to complete in order to satisfy the Definition of Done.
   validations:
     required: true
     render: markdown
 
-- type: checkboxes
+- type: textarea
   attributes:
     label: ToDo Items
     description: Complete the following items before requesting a PR review.
-    options:
-    - label: Issue linked to the correct project _(if applicable)_.
-    - label: Draft pull request created and linked to this issue _(only required with code changes)_.
+    value: |
+      ### The items to complete to satisfy the Definition of Done.
+      - [ ] Issue linked to the correct project _(if applicable)_.
+      - [ ] Draft pull request created and linked to this issue _(only required with code changes)_.
+  validations:
+    required: true
+    render: markdown
 
 - type: checkboxes
   id: terms
