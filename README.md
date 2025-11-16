@@ -11,6 +11,6 @@
 ![Website Status](https://img.shields.io/website/https/kinsondigital.github.io/blog?label=Blog%20Site%20Status&up_message=Blog%20Up🤘🏻&up_color=seagreen&down_message=Blog%20Down🥺&down_color=indianred)
 </span>
 
-This blog website is built using [Docusaurus 2](https://docusaurus.io/).  
+This blog website is built using [Docusaurus 3](https://docusaurus.io/).  
 We do not take pull requests for this blog, but you are welcome to raise any issues
 when it comes to spelling, grammar, broken links, or misinformation.
